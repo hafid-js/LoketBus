@@ -1,32 +1,25 @@
 package com.hafidtech.loketbus.ui.auth
 
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
-import com.hafidtech.loketbus.R
-import com.hafidtech.loketbus.ui.auth.ui.main.SectionsPagerAdapter
+import androidx.viewbinding.ViewBinding
+import com.bagicode.bagicodebaseutils.basewithbinding.BaseBindingActivity
 import com.hafidtech.loketbus.databinding.ActivityAuthBinding
 
-class AuthActivity : AppCompatActivity() {
+class AuthActivity : BaseBindingActivity() {
 
     private lateinit var binding: ActivityAuthBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun getActivityBinding(): ViewBinding {
         binding = ActivityAuthBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        return binding
+    }
 
+    override fun onBindView() {
         val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
-        val viewPager: ViewPager = binding.viewPager
-        viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = binding.tabs
-        tabs.setupWithViewPager(viewPager)
-
+        binding.viewPager.adapter = sectionsPagerAdapter
+        binding.tabs.setupWithViewPager(binding.viewPager)
     }
 }
