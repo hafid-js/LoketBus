@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"/>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_sigin"
         android:text="Sign in"
         android:background="@drawable/sp_rectangle_radius_20_gradient"
         android:textAllCaps="false"
