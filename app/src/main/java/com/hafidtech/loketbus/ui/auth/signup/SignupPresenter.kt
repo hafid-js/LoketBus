@@ -17,7 +17,7 @@ class SignupPresenter (private val view: SignupContract.View): SignupContract.Pr
     }
 
     override fun setSignup(email: String, pass: String, username: String) {
-        val disposable = HttpClient.getInstance().getApi().setRegister(
+        val disposable = HttpClient.getInstance().getApi()!!.setRegister(
             email,
             pass,
             username
