@@ -24,7 +24,7 @@ class HafidTechLoketBus : MultiDexApplication() {
     }
 
     fun setToken(token : String) {
-        getPreferences().edit().putString("PREFERENCE_TOKEN", token)
+        getPreferences().edit().putString("PREFERENCE_TOKEN", token).apply()
         HttpClient.getInstance().buildRetrofitClient(token)
     }
 
