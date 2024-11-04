@@ -1,7 +1,7 @@
 package com.hafidtech.loketbus.ui.network
 
 import com.bagicode.bagicodebaseutils.utils.Helpers
-import com.hafidtech.loketbus.ui.LoketBusApp
+import com.hafidtech.loketbus.ui.HafidTechLoketBus
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -36,7 +36,7 @@ class HttpClient {
     }
 
     private fun buildRetrofitClient() {
-        val token = LoketBusApp.getApp().getToken()
+        val token = HafidTechLoketBus.getApp().getToken()
         buildRetrofitClient(token)
     }
 
@@ -57,7 +57,7 @@ class HttpClient {
 
         val okHttpClient = builder.build()
         client = Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL+"loketbus/")
+            .baseUrl(BuildConfig.BASE_URL+"bcadvance/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(Helpers.getDefaultGson()))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

@@ -1,15 +1,15 @@
 package com.hafidtech.loketbus.ui
 
 import android.content.SharedPreferences
+import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import androidx.preference.PreferenceManager
 import com.hafidtech.loketbus.ui.network.HttpClient
 
-class LoketBusApp : MultiDexApplication() {
-
+class HafidTechLoketBus : MultiDexApplication() {
     companion object {
-        lateinit var instance : LoketBusApp
-        fun getApp() : LoketBusApp {
+        lateinit var instance : HafidTechLoketBus
+        fun getApp() : HafidTechLoketBus {
             return instance
         }
     }
@@ -45,3 +45,4 @@ class LoketBusApp : MultiDexApplication() {
         HttpClient.getInstance().buildRetrofitClient("")
     }
 }
+
