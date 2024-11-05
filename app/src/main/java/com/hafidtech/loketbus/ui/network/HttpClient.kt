@@ -10,6 +10,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import com.hafidtech.loketbus.ui.network.BuildConfig
+import com.readystatesoftware.chuck.Chuck
+import com.readystatesoftware.chuck.ChuckInterceptor
 
 class HttpClient {
 
@@ -49,6 +51,7 @@ class HttpClient {
             val interceptor = HttpLoggingInterceptor()
             interceptor.level = HttpLoggingInterceptor.Level.BODY
             builder.addInterceptor(interceptor)
+            builder.addInterceptor(ChuckInterceptor(HafidTechLoketBus.getApp()))
         }
 
         if (token != null) {
