@@ -1,4 +1,4 @@
-package com.hafidtech.loketbus.ui.main.ui.profile
+package com.hafidtech.loketbus.ui.main.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

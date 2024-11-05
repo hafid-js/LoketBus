@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import androidx.preference.PreferenceManager
+//import androidx.preference.PreferenceManager
 import com.hafidtech.loketbus.ui.network.HttpClient
 
 class HafidTechLoketBus : MultiDexApplication() {

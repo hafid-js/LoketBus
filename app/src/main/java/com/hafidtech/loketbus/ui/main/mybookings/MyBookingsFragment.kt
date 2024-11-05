@@ -1,4 +1,4 @@
-package com.hafidtech.loketbus.ui.main.ui.profile
+package com.hafidtech.loketbus.ui.main.mybookings
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,12 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.hafidtech.loketbus.databinding.FragmentNotificationsBinding
-import com.hafidtech.loketbus.databinding.FragmentProfileBinding
+import com.hafidtech.loketbus.databinding.FragmentMybookingsBinding
 
-class ProfileFragment : Fragment() {
+class MyBookingsFragment : Fragment() {
 
-    private var _binding: FragmentProfileBinding? = null
+    private var _binding: FragmentMybookingsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -23,14 +22,14 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val profileViewModel =
-            ViewModelProvider(this).get(ProfileViewModel::class.java)
+        val myBookingsViewModel =
+            ViewModelProvider(this).get(MyBookingsViewModel::class.java)
 
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        _binding = FragmentMybookingsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textProfile
-        profileViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textMybookings
+        myBookingsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

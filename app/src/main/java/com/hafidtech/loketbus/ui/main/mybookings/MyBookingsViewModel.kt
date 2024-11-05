@@ -1,13 +1,13 @@
-package com.hafidtech.loketbus.ui.main.ui.home
+package com.hafidtech.loketbus.ui.main.mybookings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class MyBookingsViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+        value = "This is My Bookings Fragment"
     }
     val text: LiveData<String> = _text
 }

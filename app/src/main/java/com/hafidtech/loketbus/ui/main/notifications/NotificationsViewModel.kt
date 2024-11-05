@@ -1,4 +1,4 @@
-package com.hafidtech.loketbus.ui.main.ui.notifications
+package com.hafidtech.loketbus.ui.main.notifications
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

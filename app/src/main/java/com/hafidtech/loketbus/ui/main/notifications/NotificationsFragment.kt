@@ -1,4 +1,4 @@
-package com.hafidtech.loketbus.ui.main.ui.notifications
+package com.hafidtech.loketbus.ui.main.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater
