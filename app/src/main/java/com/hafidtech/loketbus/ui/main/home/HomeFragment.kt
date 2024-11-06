@@ -11,7 +11,9 @@ import androidx.viewbinding.ViewBinding
 import com.bagicode.bagicodebaseutils.basewithbinding.BaseBindingFragment
 import com.hafidtech.loketbus.R
 import com.hafidtech.loketbus.databinding.FragmentHomeBinding
+import com.hafidtech.loketbus.ui.dialog.bottomsheet.ListPenumpangBottomSheet
 import com.hafidtech.loketbus.ui.dialog.bottomsheet.ListTerminalBottomSheet
+import com.hafidtech.loketbus.ui.dialog.bottomsheet.ListTipeBusBottomSheet
 import com.hafidtech.loketbus.ui.model.TerminalModel
 
 class HomeFragment : BaseBindingFragment() {
@@ -19,6 +21,8 @@ class HomeFragment : BaseBindingFragment() {
     private lateinit var binding : FragmentHomeBinding
     private var dataDari = ArrayList<TerminalModel>()
     private var dataTujuan = ArrayList<TerminalModel>()
+    private var dataPenumpang = ArrayList<Int>()
+    private var dataTipeBus = ArrayList<String>()
 
     override fun getFragmentView(): ViewBinding {
         binding = FragmentHomeBinding.inflate(layoutInflater)
@@ -54,6 +58,34 @@ class HomeFragment : BaseBindingFragment() {
                 "Silahkan sesuaikan terminal tujuan Anda"
             ).show(parentFragmentManager, "")
         }
+
+        binding.ivPenumpang.setOnClickListener {
+
+            ListPenumpangBottomSheet.newInstance(
+                object : ListPenumpangBottomSheet.Listener {
+                    override fun onClick(data: Int) {
+                        binding.tvPenumpangValue.text = "${data} Penumpang"
+                    }
+                },
+                0, dataPenumpang,
+                "Penumpang",
+                "Silahkan sesuaikan jumlah penumpang"
+            ).show(parentFragmentManager, "")
+        }
+
+        binding.ivTipeBus.setOnClickListener {
+
+            ListTipeBusBottomSheet.newInstance(
+                object : ListTipeBusBottomSheet.Listener {
+                    override fun onClick(data: String) {
+                        binding.tvTipeBusValue.text = data
+                    }
+                },
+                0, dataTipeBus,
+                "Tipe Bus",
+                "Silahkan pilih tipe bus"
+            ).show(parentFragmentManager, "")
+        }
     }
     private fun initData() {
         dataDari.add(TerminalModel("Terminal Pulo Gebang", "PGB"))
@@ -61,5 +93,12 @@ class HomeFragment : BaseBindingFragment() {
 
         dataTujuan.add(TerminalModel("Terminal Kebumen", "KBM"))
         dataTujuan.add(TerminalModel("Terminal Arjosari", "ARJ"))
+
+        dataPenumpang.add(1)
+        dataPenumpang.add(2)
+
+        dataTipeBus.add("Semua")
+        dataTipeBus.add("Bisnis")
+        dataTipeBus.add("Ekonomi")
     }
 }
