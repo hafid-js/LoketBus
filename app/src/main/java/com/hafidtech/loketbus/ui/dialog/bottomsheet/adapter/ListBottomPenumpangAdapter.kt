@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hafidtech.loketbus.databinding.ItemTerminalBinding
 import com.hafidtech.loketbus.ui.model.TerminalModel
 
-class ListBottomTerminalAdapter(
+class ListBottomPenumpangAdapter(
 
     private val listData : ArrayList<TerminalModel>,
             private val itemAdapterCallback : ItemAdapterCallback
-) : RecyclerView.Adapter<ListBottomTerminalAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ListBottomPenumpangAdapter.ViewHolder>() {
 
     lateinit var binding : ItemTerminalBinding
     interface ItemAdapterCallback {
@@ -21,7 +21,7 @@ class ListBottomTerminalAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ListBottomTerminalAdapter.ViewHolder {
+    ): ListBottomPenumpangAdapter.ViewHolder {
         binding = ItemTerminalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
@@ -38,7 +38,6 @@ class ListBottomTerminalAdapter(
         fun bind(data: TerminalModel, itemAdapterCallback: ItemAdapterCallback) {
             itemView.apply {
                 binding.tvItemTitle.text = data.namaTerminal
-                binding.tvItemSubtitle.text = data.codeTerminal
 
                 itemView.setOnClickListener {
                     itemAdapterCallback.onListBottomTerminalClick(it, data)

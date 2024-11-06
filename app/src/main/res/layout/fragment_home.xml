@@ -92,7 +92,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_dari_value" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/tv_tujuan_value"
             style="@style/montserrat.17black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,20 +103,20 @@
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
         <ImageView
-            android:id="@+id/imageView7"
+            android:id="@+id/iv_tujuan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-            app:layout_constraintBottom_toBottomOf="@+id/textView6"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_tujuan_value"
             app:layout_constraintEnd_toEndOf="@+id/ivDari"
-            app:layout_constraintTop_toTopOf="@+id/textView6" />
+            app:layout_constraintTop_toTopOf="@+id/tv_tujuan_value" />
 
         <ImageView
             android:id="@+id/imageView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_location_to"
-            app:layout_constraintBottom_toBottomOf="@+id/textView6"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_tujuan_value"
             app:layout_constraintStart_toStartOf="@+id/imageView5"
             app:layout_constraintTop_toTopOf="@+id/textView5" />
     </androidx.constraintlayout.widget.ConstraintLayout>

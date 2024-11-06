@@ -18,6 +18,7 @@ class HomeFragment : BaseBindingFragment() {
 
     private lateinit var binding : FragmentHomeBinding
     private var dataDari = ArrayList<TerminalModel>()
+    private var dataTujuan = ArrayList<TerminalModel>()
 
     override fun getFragmentView(): ViewBinding {
         binding = FragmentHomeBinding.inflate(layoutInflater)
@@ -34,12 +35,31 @@ class HomeFragment : BaseBindingFragment() {
                         binding.tvDariValue.text = data.namaTerminal
                     }
                 },
-                0, dataDari, "Pilih keberangkatan", "Silahkan sesuaikan terminal keberangkatan Anda"
+                0, dataDari,
+                "Pilih Terminal Keberangkatan",
+                "Silahkan sesuaikan terminal keberangkatan Anda"
+            ).show(parentFragmentManager, "")
+        }
+
+        binding.ivTujuan.setOnClickListener {
+
+            ListTerminalBottomSheet.newInstance(
+                object : ListTerminalBottomSheet.Listener {
+                    override fun onClick(data: TerminalModel) {
+                        binding.tvTujuanValue.text = data.namaTerminal
+                    }
+                },
+                0, dataTujuan,
+                "Pilih Terminal Tujuan",
+                "Silahkan sesuaikan terminal tujuan Anda"
             ).show(parentFragmentManager, "")
         }
     }
     private fun initData() {
         dataDari.add(TerminalModel("Terminal Pulo Gebang", "PGB"))
         dataDari.add(TerminalModel("Terminal Kutoarjo", "KTJ"))
+
+        dataTujuan.add(TerminalModel("Terminal Kebumen", "KBM"))
+        dataTujuan.add(TerminalModel("Terminal Arjosari", "ARJ"))
     }
 }
