@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/ic_line" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvTitle"
         style="@style/montserrat.14black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,21 +29,22 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/tvSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Subtitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list_string"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="31dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13"
+        app:layout_constraintTop_toBottomOf="@+id/tvSubtitle"
         tools:itemCount="3"
         tools:listitem="@layout/item_string"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
