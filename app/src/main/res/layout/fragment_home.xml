@@ -144,7 +144,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/tv_date_value"
             style="@style/montserrat.14black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -159,8 +159,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Penumpang"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintStart_toStartOf="@+id/tv_date_value"
+            app:layout_constraintTop_toBottomOf="@+id/tv_date_value" />
 
         <TextView
             android:id="@+id/tv_penumpang_value"
@@ -193,12 +193,12 @@
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
         <ImageView
-            android:id="@+id/imageView9"
+            android:id="@+id/iv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-            app:layout_constraintBottom_toBottomOf="@+id/textView8"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_date_value"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView7" />
 
@@ -208,7 +208,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
             app:layout_constraintBottom_toBottomOf="@+id/tv_penumpang_value"
-            app:layout_constraintEnd_toEndOf="@+id/imageView9"
+            app:layout_constraintEnd_toEndOf="@+id/iv_date"
             app:layout_constraintTop_toTopOf="@+id/textView9" />
 
         <ImageView

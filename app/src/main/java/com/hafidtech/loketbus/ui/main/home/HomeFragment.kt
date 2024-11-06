@@ -9,12 +9,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.bagicode.bagicodebaseutils.basewithbinding.BaseBindingFragment
+import com.bagicode.bagicodebaseutils.utils.Const
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointForward
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.hafidtech.loketbus.R
 import com.hafidtech.loketbus.databinding.FragmentHomeBinding
 import com.hafidtech.loketbus.ui.dialog.bottomsheet.ListPenumpangBottomSheet
 import com.hafidtech.loketbus.ui.dialog.bottomsheet.ListTerminalBottomSheet
 import com.hafidtech.loketbus.ui.dialog.bottomsheet.ListTipeBusBottomSheet
 import com.hafidtech.loketbus.ui.model.TerminalModel
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.TimeZone
 
 class HomeFragment : BaseBindingFragment() {
 
@@ -31,6 +38,11 @@ class HomeFragment : BaseBindingFragment() {
 
     override fun onBindView() {
         initData()
+        initListener()
+
+    }
+
+    private fun initListener() {
         binding.ivDari.setOnClickListener {
 
             ListTerminalBottomSheet.newInstance(
@@ -86,7 +98,30 @@ class HomeFragment : BaseBindingFragment() {
                 "Silahkan pilih tipe bus"
             ).show(parentFragmentManager, "")
         }
+
+        binding.ivDate.setOnClickListener{
+            var calendarSetting = CalendarConstraints.Builder()
+            calendarSetting.setValidator(DateValidatorPointForward.now())
+
+            var materialDatePickerBuilder : MaterialDatePicker.Builder<*> = MaterialDatePicker.Builder.datePicker()
+            materialDatePickerBuilder.setTitleText("Tanggal Keberangkatan")
+            materialDatePickerBuilder.setCalendarConstraints(calendarSetting.build())
+
+            var materialDatePicker = materialDatePickerBuilder.build()
+            materialDatePicker.show(parentFragmentManager, "DATE_PICKER")
+
+            materialDatePicker.addOnPositiveButtonClickListener {
+                val utc = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+                utc.timeInMillis = it as Long
+
+                var format = SimpleDateFormat(Const.DATE_FORMAT_DAY_DATE_MONTH_YEAR)
+                val formatted = format.format(utc.time)
+
+                binding.tvDateValue.text = formatted
+            }
+        }
     }
+
     private fun initData() {
         dataDari.add(TerminalModel("Terminal Pulo Gebang", "PGB"))
         dataDari.add(TerminalModel("Terminal Kutoarjo", "KTJ"))
