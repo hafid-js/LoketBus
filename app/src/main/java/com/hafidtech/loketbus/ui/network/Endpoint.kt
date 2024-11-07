@@ -1,11 +1,14 @@
 package com.hafidtech.loketbus.ui.network
 
 import com.hafidtech.loketbus.ui.model.Wrapper
+import com.hafidtech.loketbus.ui.model.response.BusResponse
 import com.hafidtech.loketbus.ui.model.response.LoginResponse
 import io.reactivex.Observable
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface Endpoint {
 
@@ -23,4 +26,13 @@ interface Endpoint {
         @Field("email") email : String,
         @Field("pass") pass : String,
     ) : Observable<Wrapper<LoginResponse>>
+
+    @GET("search.php")
+    fun getBusList(
+        @Query("tipe") tipe: String?,
+        @Query("penumpang") penumpang: String?,
+        @Query("date") date: String?,
+        @Query("dari") dari: String?,
+        @Query("tujuan") tujuan: String?
+    ): Observable<Wrapper<BusResponse>>
 }

@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.bagicode.bagicodebaseutils.basewithbinding.BaseBindingFragment
 import com.bagicode.bagicodebaseutils.utils.Const
+import com.bagicode.bagicodebaseutils.utils.Helpers.getCurrentDate
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -19,6 +20,7 @@ import com.hafidtech.loketbus.databinding.FragmentHomeBinding
 import com.hafidtech.loketbus.ui.dialog.bottomsheet.ListPenumpangBottomSheet
 import com.hafidtech.loketbus.ui.dialog.bottomsheet.ListTerminalBottomSheet
 import com.hafidtech.loketbus.ui.dialog.bottomsheet.ListTipeBusBottomSheet
+import com.hafidtech.loketbus.ui.model.BusRequest
 import com.hafidtech.loketbus.ui.model.TerminalModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -31,6 +33,7 @@ class HomeFragment : BaseBindingFragment() {
     private var dataTujuan = ArrayList<TerminalModel>()
     private var dataPenumpang = ArrayList<Int>()
     private var dataTipeBus = ArrayList<String>()
+    private lateinit var busRequest: BusRequest
 
     override fun getFragmentView(): ViewBinding {
         binding = FragmentHomeBinding.inflate(layoutInflater)
@@ -50,6 +53,11 @@ class HomeFragment : BaseBindingFragment() {
                 object : ListTerminalBottomSheet.Listener {
                     override fun onClick(data: TerminalModel) {
                         binding.tvDariValue.text = data.namaTerminal
+
+                        busRequest.apply {
+                            dari = data.namaTerminal
+                            dariCode = data.codeTerminal
+                        }
                     }
                 },
                 0, dataDari,
@@ -64,6 +72,11 @@ class HomeFragment : BaseBindingFragment() {
                 object : ListTerminalBottomSheet.Listener {
                     override fun onClick(data: TerminalModel) {
                         binding.tvTujuanValue.text = data.namaTerminal
+
+                        busRequest.apply {
+                            tujuan = data.namaTerminal
+                            tujuanCode = data.codeTerminal
+                        }
                     }
                 },
                 0, dataTujuan,
@@ -78,6 +91,10 @@ class HomeFragment : BaseBindingFragment() {
                 object : ListPenumpangBottomSheet.Listener {
                     override fun onClick(data: Int) {
                         binding.tvPenumpangValue.text = "${data} Penumpang"
+
+                        busRequest.apply {
+                            penumpang = data
+                        }
                     }
                 },
                 0, dataPenumpang,
@@ -92,6 +109,10 @@ class HomeFragment : BaseBindingFragment() {
                 object : ListTipeBusBottomSheet.Listener {
                     override fun onClick(data: String) {
                         binding.tvTipeBusValue.text = data
+
+                        busRequest.apply {
+                            tipe = data
+                        }
                     }
                 },
                 0, dataTipeBus,
@@ -119,11 +140,15 @@ class HomeFragment : BaseBindingFragment() {
                 val formatted = format.format(utc.time)
 
                 binding.tvDateValue.text = formatted
+                busRequest.apply {
+                    date = formatted
+                }
             }
         }
 
         binding.btnCari.setOnClickListener{
-            startActivity(Intent(requireContext(), HomeDetailActivity::class.java))
+            startActivity(Intent(requireContext(), HomeDetailActivity::class.java)
+                .putExtra("data", busRequest))
         }
     }
 
@@ -140,5 +165,9 @@ class HomeFragment : BaseBindingFragment() {
         dataTipeBus.add("Semua")
         dataTipeBus.add("Bisnis")
         dataTipeBus.add("Ekonomi")
+
+        busRequest.apply {
+            date = getCurrentDate()
+        }
     }
 }
