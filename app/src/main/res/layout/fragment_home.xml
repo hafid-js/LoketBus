@@ -222,7 +222,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button"
+        android:id="@+id/btn_cari"
         style="@style/Button.18White"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

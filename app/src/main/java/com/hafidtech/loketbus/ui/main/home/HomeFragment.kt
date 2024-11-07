@@ -1,5 +1,6 @@
 package com.hafidtech.loketbus.ui.main.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -119,6 +120,10 @@ class HomeFragment : BaseBindingFragment() {
 
                 binding.tvDateValue.text = formatted
             }
+        }
+
+        binding.btnCari.setOnClickListener{
+            startActivity(Intent(requireContext(), HomeDetailActivity::class.java))
         }
     }
 
