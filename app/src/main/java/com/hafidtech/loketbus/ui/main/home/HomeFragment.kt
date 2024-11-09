@@ -147,8 +147,19 @@ class HomeFragment : BaseBindingFragment() {
         }
 
         binding.btnCari.setOnClickListener{
-            startActivity(Intent(requireContext(), HomeDetailActivity::class.java)
-                .putExtra("data", busRequest))
+
+            if (busRequest.dari.isNullOrEmpty()) {
+                showSnackbarMessage(binding.btnCari, "Silahkan pilih terminal keberangkatan", Const.ToastType.Error)
+            } else if (busRequest.tujuan.isNullOrEmpty()) {
+                showSnackbarMessage(binding.btnCari, "Silahkan pilih terminal tujuan", Const.ToastType.Error)
+            } else if (busRequest.penumpang == 0) {
+            showSnackbarMessage(binding.btnCari, "Silahkan tentukan jumlah penumpang", Const.ToastType.Error)
+            }else if (busRequest.tipe.isNullOrEmpty()) {
+                showSnackbarMessage(binding.btnCari, "Silahkan pilih tipe bus", Const.ToastType.Error)
+            }else {
+                startActivity(Intent(requireContext(), HomeDetailActivity::class.java)
+                    .putExtra("data", busRequest))
+            }
         }
     }
 

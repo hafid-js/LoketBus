@@ -9,6 +9,8 @@ import androidx.viewbinding.ViewBinding
 import com.bagicode.bagicodebaseutils.basewithbinding.BaseBindingFragment
 import com.hafidtech.loketbus.R
 import com.hafidtech.loketbus.databinding.FragmentPilihBusBinding
+import com.hafidtech.loketbus.ui.model.BusRequest
+import com.hafidtech.loketbus.ui.model.response.BusResponse
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,9 +22,11 @@ private const val ARG_PARAM2 = "param2"
  * Use the [PilihBusFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PilihBusFragment : BaseBindingFragment() {
+class PilihBusFragment : BaseBindingFragment(), PilihBusContract.View {
 
     private lateinit var binding : FragmentPilihBusBinding
+    private lateinit var presenter : PilihBusPresenter
+    private lateinit var busRequest: BusRequest
 
     override fun getFragmentView(): ViewBinding {
         binding = FragmentPilihBusBinding.inflate(layoutInflater)
@@ -30,6 +34,19 @@ class PilihBusFragment : BaseBindingFragment() {
     }
 
     override fun onBindView() {
+        presenter = PilihBusPresenter(this)
+         var busRequestArgs = arguments?.getParcelable<BusRequest>("data")
+        busRequestArgs?.let {
+            presenter.getBusList(it)
+            busRequest = it
+        }
+    }
 
+    override fun onBusSuccess(busResponse: BusResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onBusFailed(message: String) {
+        TODO("Not yet implemented")
     }
 }
