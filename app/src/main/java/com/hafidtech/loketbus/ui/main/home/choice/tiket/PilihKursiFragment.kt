@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.bagicode.bagicodebaseutils.basewithbinding.BaseBindingFragment
 import com.bagicode.bagicodebaseutils.utils.Const
+import com.bagicode.bagicodebaseutils.utils.loadRoundedImage
 import com.bagicode.bagicodebaseutils.utils.visible
 import com.hafidtech.loketbus.R
 import com.hafidtech.loketbus.databinding.FragmentPilihKursiBinding
@@ -41,6 +42,16 @@ class PilihKursiFragment : BaseBindingFragment(), KursiAdapter.ItemKursiAdapterC
 
         busParms?.code?.let {
             presenter.getKursiList(it)
+        }
+
+        binding.ivBus.loadRoundedImage(busParms?.image, 4)
+        binding.btnLanjutkan.setOnClickListener{
+            if (dataPick?.penumpang == listKursi.size) {
+
+            } else {
+                showSnackbarMessage(binding.btnLanjutkan, "Total kursi yang kamu pesan ${dataPick?.penumpang} slot",
+                    Const.ToastType.Error)
+            }
         }
 
     }
