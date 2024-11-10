@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.bagicode.bagicodebaseutils.basewithbinding.BaseBindingFragment
@@ -51,7 +52,12 @@ class PilihKursiFragment : BaseBindingFragment(), KursiAdapter.ItemKursiAdapterC
             if (dataPick?.penumpang == listKursi.size) {
                 ConfirmBottomSheet.newInstance(object : ConfirmBottomSheet.Listener {
                     override fun onOptionClick(dialog: Dialog, position: Int) {
-
+//                        dialog.dismiss()
+                        var bundle = Bundle()
+                        bundle.putParcelable("data", busParms)
+                        bundle.putParcelable("dataPick", dataPick)
+                        bundle.putParcelableArrayList("dataKursi", listKursi)
+                        findNavController().navigate(R.id.action_personal_info, bundle)
                     }
                 }, busParms!!, listKursi).show(parentFragmentManager, "")
             } else {

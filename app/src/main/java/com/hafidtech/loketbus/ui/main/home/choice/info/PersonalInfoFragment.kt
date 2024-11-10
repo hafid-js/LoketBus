@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.bagicode.bagicodebaseutils.basewithbinding.BaseBindingFragment
 import com.hafidtech.loketbus.R
+import com.hafidtech.loketbus.databinding.FragmentPersonalInfoBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,8 +22,11 @@ private const val ARG_PARAM2 = "param2"
  */
 class PersonalInfoFragment : BaseBindingFragment() {
 
+    private lateinit var binding : FragmentPersonalInfoBinding
+
     override fun getFragmentView(): ViewBinding {
-        TODO("Not yet implemented")
+        binding = FragmentPersonalInfoBinding.inflate(layoutInflater)
+        return binding
     }
 
     override fun onBindView() {
