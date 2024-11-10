@@ -11,7 +11,10 @@ import com.bagicode.bagicodebaseutils.basewithbinding.BaseBindingFragment
 import com.bagicode.bagicodebaseutils.utils.Const
 import com.hafidtech.loketbus.R
 import com.hafidtech.loketbus.databinding.FragmentPilihBusBinding
+import com.hafidtech.loketbus.ui.dialog.bottomsheet.ListTerminalBottomSheet
+import com.hafidtech.loketbus.ui.dialog.bottomsheet.ListTipeBusBottomSheet
 import com.hafidtech.loketbus.ui.model.BusRequest
+import com.hafidtech.loketbus.ui.model.TerminalModel
 import com.hafidtech.loketbus.ui.model.response.BusResponse
 
 // TODO: Rename parameter arguments, choose names that match
@@ -41,6 +44,25 @@ class PilihBusFragment : BaseBindingFragment(), PilihBusAdapter.ItemAdapterCallb
         busRequestArgs?.let {
             presenter.getBusList(it)
             busRequest = it
+        }
+
+        var dataTipeBus = ArrayList<String>()
+        dataTipeBus.add("Semua")
+        dataTipeBus.add("Bisnis")
+        dataTipeBus.add("Ekonomi")
+
+        binding.ivFilter.setOnClickListener{
+            ListTipeBusBottomSheet.newInstance(object : ListTipeBusBottomSheet.Listener {
+                override fun onClick(data: String) {
+                    presenter.getBusList(busRequest.apply {
+                        tipe = data
+                    })
+                }
+            }, 0,
+                dataTipeBus,
+                "Filter Tipe Bus",
+                "Gunakan filter untuk mempermudah pencarian")
+                .show(parentFragmentManager, "")
         }
     }
 

@@ -24,9 +24,6 @@
             android:name=".ui.main.home.HomeDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.dialog.bottomsheet.ListTerminalBottomSheet"
-            android:exported="false" />
-        <activity
             android:name=".ui.main.MainActivity"
             android:theme="@style/Theme.AdsAdvance.NoActionBar" />
         <activity
