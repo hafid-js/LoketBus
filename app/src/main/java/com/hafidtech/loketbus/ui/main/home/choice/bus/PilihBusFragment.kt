@@ -20,13 +20,15 @@ import com.hafidtech.loketbus.ui.model.response.BusResponse
 
 class PilihBusFragment : BaseBindingFragment(), PilihBusAdapter.ItemAdapterCallback, PilihBusContract.View {
 
-    private lateinit var binding : FragmentPilihBusBinding
+    private var binding : FragmentPilihBusBinding?=null
     private lateinit var presenter : PilihBusPresenter
     private lateinit var busRequest: BusRequest
 
     override fun getFragmentView(): ViewBinding {
-        binding = FragmentPilihBusBinding.inflate(layoutInflater)
-        return binding
+        if (binding == null) {
+            binding = FragmentPilihBusBinding.inflate(layoutInflater)
+        }
+        return binding as FragmentPilihBusBinding
     }
 
     override fun onBindView() {
@@ -42,7 +44,7 @@ class PilihBusFragment : BaseBindingFragment(), PilihBusAdapter.ItemAdapterCallb
         dataTipeBus.add("Bisnis")
         dataTipeBus.add("Ekonomi")
 
-        binding.ivFilter.setOnClickListener{
+        binding?.ivFilter?.setOnClickListener{
             ListTipeBusBottomSheet.newInstance(object : ListTipeBusBottomSheet.Listener {
                 override fun onClick(data: String) {
                     presenter.getBusList(busRequest.apply {
@@ -61,12 +63,12 @@ class PilihBusFragment : BaseBindingFragment(), PilihBusAdapter.ItemAdapterCallb
         var adapter = PilihBusAdapter(busResponse, this)
         val layoutManager = LinearLayoutManager(activity)
 
-        binding.rvBus.layoutManager = layoutManager
-        binding.rvBus.adapter = adapter
+        binding?.rvBus?.layoutManager = layoutManager
+        binding?.rvBus?.adapter = adapter
     }
 
     override fun onBusFailed(message: String) {
-        showSnackbarMessage(binding.rvBus, message, Const.ToastType.Error)
+        binding?.rvBus?.let { showSnackbarMessage(it, message, Const.ToastType.Error) }
     }
 
     override fun onListPilihBusClick(v: View, data: BusResponse) {

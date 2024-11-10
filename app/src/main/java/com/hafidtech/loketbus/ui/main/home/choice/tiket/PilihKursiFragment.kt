@@ -25,7 +25,9 @@ class PilihKursiFragment : BaseBindingFragment(), KursiAdapter.ItemKursiAdapterC
     private var dataPick : BusRequest ?=null
 
     override fun getFragmentView(): ViewBinding {
-        binding = FragmentPilihKursiBinding.inflate(layoutInflater)
+        if (binding == null) {
+            binding = FragmentPilihKursiBinding.inflate(layoutInflater)
+        }
         return binding
     }
 
