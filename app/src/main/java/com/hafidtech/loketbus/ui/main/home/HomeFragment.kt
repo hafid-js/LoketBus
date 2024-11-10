@@ -20,6 +20,7 @@ import com.hafidtech.loketbus.databinding.FragmentHomeBinding
 import com.hafidtech.loketbus.ui.dialog.bottomsheet.ListPenumpangBottomSheet
 import com.hafidtech.loketbus.ui.dialog.bottomsheet.ListTerminalBottomSheet
 import com.hafidtech.loketbus.ui.dialog.bottomsheet.ListTipeBusBottomSheet
+import com.hafidtech.loketbus.ui.main.home.choice.bus.PilihBusAdapter
 import com.hafidtech.loketbus.ui.model.BusRequest
 import com.hafidtech.loketbus.ui.model.TerminalModel
 import java.text.SimpleDateFormat
@@ -159,6 +160,7 @@ class HomeFragment : BaseBindingFragment() {
             }else {
                 startActivity(Intent(requireContext(), HomeDetailActivity::class.java)
                     .putExtra("data", busRequest))
+
             }
         }
     }
@@ -176,6 +178,7 @@ class HomeFragment : BaseBindingFragment() {
         dataTipeBus.add("Semua")
         dataTipeBus.add("Bisnis")
         dataTipeBus.add("Ekonomi")
+
 
         busRequest = BusRequest()
         busRequest.apply {

@@ -14,7 +14,7 @@ class PilihBusPresenter (private val view: PilihBusContract.View): PilihBusContr
         this.mCompositeDisposable = CompositeDisposable()
     }
     override fun subscribe() {
-        TODO("Not yet implemented")
+
     }
 
     override fun getBusList(busRequest: BusRequest) {
