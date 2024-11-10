@@ -92,7 +92,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/rv_kursi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -105,7 +105,7 @@
         tools:listitem="@layout/item_kursi"/>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_lanjutkan"
         style="@style/montserrat.18white"
         android:visibility="gone"
         android:layout_width="0dp"

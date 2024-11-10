@@ -2,6 +2,7 @@ package com.hafidtech.loketbus.ui.network
 
 import com.hafidtech.loketbus.ui.model.Wrapper
 import com.hafidtech.loketbus.ui.model.response.BusResponse
+import com.hafidtech.loketbus.ui.model.response.KursiResponse
 import com.hafidtech.loketbus.ui.model.response.LoginResponse
 import io.reactivex.Observable
 import retrofit2.http.Field
@@ -35,4 +36,9 @@ interface Endpoint {
         @Query("dari") dari: String?,
         @Query("tujuan") tujuan: String?
     ): Observable<Wrapper<ArrayList<BusResponse>>>
+
+    @GET("kursi.php")
+    fun getKursiList(
+        @Query("id_bus") id_bus: String?
+    ): Observable<Wrapper<ArrayList<KursiResponse>>>
 }

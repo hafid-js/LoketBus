@@ -6,9 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hafidtech.loketbus.databinding.ItemBusBinding
-import com.hafidtech.loketbus.databinding.ItemTerminalBinding
-import com.hafidtech.loketbus.ui.model.BusRequest
-import com.hafidtech.loketbus.ui.model.TerminalModel
 import com.hafidtech.loketbus.ui.model.response.BusResponse
 
 class PilihBusAdapter(
@@ -54,6 +51,9 @@ class PilihBusAdapter(
                 val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 binding.rvTimeBus.layoutManager = layoutManager
                 binding.rvTimeBus.adapter = timeAdapter
+
+
+
             }
         }
     }
