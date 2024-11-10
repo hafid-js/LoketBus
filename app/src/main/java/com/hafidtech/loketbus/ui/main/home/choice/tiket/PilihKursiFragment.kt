@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.bagicode.bagicodebaseutils.basewithbinding.BaseBindingFragment
 import com.bagicode.bagicodebaseutils.utils.Const
+import com.bagicode.bagicodebaseutils.utils.visible
 import com.hafidtech.loketbus.R
 import com.hafidtech.loketbus.databinding.FragmentPilihKursiBinding
 import com.hafidtech.loketbus.ui.model.BusRequest
@@ -21,13 +22,14 @@ class PilihKursiFragment : BaseBindingFragment(), KursiAdapter.ItemKursiAdapterC
     lateinit var presenter: PilihKursiPresenter
     lateinit var adapter: KursiAdapter
 
+    var dummyListTemp = ArrayList<KursiResponse>()
+    var listKursi = ArrayList<KursiResponse>()
+
     private var busParms : BusResponse ?=null
     private var dataPick : BusRequest ?=null
 
     override fun getFragmentView(): ViewBinding {
-        if (binding == null) {
             binding = FragmentPilihKursiBinding.inflate(layoutInflater)
-        }
         return binding
     }
 
@@ -49,10 +51,25 @@ class PilihKursiFragment : BaseBindingFragment(), KursiAdapter.ItemKursiAdapterC
         check: Boolean,
         position: Int
     ) {
+        var selectKursi = dummyListTemp.get(position).apply {
+            checkKursi = check
+        }
+        adapter.setData(dummyListTemp)
 
+        if (check) {
+            listKursi.add(selectKursi)
+        } else {
+            listKursi.remove(selectKursi)
+        }
+
+        if (listKursi.size == dataPick?.penumpang) {
+            binding.btnLanjutkan.visible()
+        }
     }
 
     override fun onKursiSuccess(response: ArrayList<KursiResponse>) {
+
+        dummyListTemp = response
         adapter = KursiAdapter(this)
         adapter.setData(response)
 
