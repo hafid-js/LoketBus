@@ -17,16 +17,6 @@ import com.hafidtech.loketbus.ui.model.BusRequest
 import com.hafidtech.loketbus.ui.model.TerminalModel
 import com.hafidtech.loketbus.ui.model.response.BusResponse
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PilihBusFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PilihBusFragment : BaseBindingFragment(), PilihBusAdapter.ItemAdapterCallback, PilihBusContract.View {
 
     private lateinit var binding : FragmentPilihBusBinding
