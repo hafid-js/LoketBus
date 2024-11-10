@@ -1,9 +1,12 @@
 package com.hafidtech.loketbus.ui.model.response
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class BusResponse(
     @Expose
     @SerializedName("classBus")
@@ -29,4 +32,4 @@ data class BusResponse(
     @Expose
     @SerializedName("title")
     var title: String?
-)
+) : Parcelable

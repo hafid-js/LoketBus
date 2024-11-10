@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.bagicode.bagicodebaseutils.basewithbinding.BaseBindingFragment
@@ -69,5 +70,10 @@ class PilihBusFragment : BaseBindingFragment(), PilihBusAdapter.ItemAdapterCallb
     }
 
     override fun onListPilihBusClick(v: View, data: BusResponse) {
+        var bundle = Bundle()
+        bundle.putParcelable("data", data)
+        bundle.putParcelable("dataPick", busRequest)
+        Navigation.findNavController(v)
+            .navigate(R.id.fragmentPilihKursi, bundle)
     }
 }

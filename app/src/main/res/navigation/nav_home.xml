@@ -8,5 +8,13 @@
     <fragment
         android:id="@+id/fragmentPilihBus"
         android:name="com.hafidtech.loketbus.ui.main.home.choice.bus.PilihBusFragment"
-        tools:layout="@layout/fragment_pilih_bus" />
+        tools:layout="@layout/fragment_pilih_bus">
+        <action android:id="@+id/action_pilih_kursi"
+            app:destination="@+id/fragmentPilihKursi"></action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentPilihKursi"
+        android:name="com.hafidtech.loketbus.ui.main.home.choice.tiket.PilihKursiFragment"
+        tools:layout="@layout/fragment_pilih_kursi" />
 </navigation>

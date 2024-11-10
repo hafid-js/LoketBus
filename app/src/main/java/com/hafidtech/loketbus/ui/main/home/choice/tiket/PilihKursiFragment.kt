@@ -8,14 +8,18 @@ import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.bagicode.bagicodebaseutils.basewithbinding.BaseBindingFragment
 import com.hafidtech.loketbus.R
+import com.hafidtech.loketbus.databinding.FragmentPilihKursiBinding
 
 class PilihKursiFragment : BaseBindingFragment() {
 
+    lateinit var binding : FragmentPilihKursiBinding
+
     override fun getFragmentView(): ViewBinding {
-        TODO("Not yet implemented")
+        binding = FragmentPilihKursiBinding.inflate(layoutInflater)
+        return binding
     }
 
     override fun onBindView() {
-        TODO("Not yet implemented")
+
     }
 }
