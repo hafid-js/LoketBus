@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.bagicode.bagicodebaseutils.basewithbinding.BaseBindingFragment
+import com.bagicode.bagicodebaseutils.utils.Const
 import com.hafidtech.loketbus.R
 import com.hafidtech.loketbus.databinding.FragmentPilihBusBinding
 import com.hafidtech.loketbus.ui.model.BusRequest
@@ -22,7 +24,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [PilihBusFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PilihBusFragment : BaseBindingFragment(), PilihBusContract.View {
+class PilihBusFragment : BaseBindingFragment(), PilihBusAdapter.ItemAdapterCallback, PilihBusContract.View {
 
     private lateinit var binding : FragmentPilihBusBinding
     private lateinit var presenter : PilihBusPresenter
@@ -42,11 +44,18 @@ class PilihBusFragment : BaseBindingFragment(), PilihBusContract.View {
         }
     }
 
-    override fun onBusSuccess(busResponse: BusResponse) {
-        TODO("Not yet implemented")
+    override fun onBusSuccess(busResponse: ArrayList<BusResponse>) {
+        var adapter = PilihBusAdapter(busResponse, this)
+        val layoutManager = LinearLayoutManager(activity)
+
+        binding.rvBus.layoutManager = layoutManager
+        binding.rvBus.adapter = adapter
     }
 
     override fun onBusFailed(message: String) {
-        TODO("Not yet implemented")
+        showSnackbarMessage(binding.rvBus, message, Const.ToastType.Error)
+    }
+
+    override fun onListPilihBusClick(v: View, data: BusResponse) {
     }
 }

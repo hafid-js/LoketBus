@@ -9,7 +9,7 @@ import com.hafidtech.loketbus.ui.model.response.LoginResponse
 interface PilihBusContract {
 
     interface View : BaseView {
-        fun onBusSuccess(busResponse: BusResponse)
+        fun onBusSuccess(busResponse: ArrayList<BusResponse>)
         fun onBusFailed(message: String)
     }
 

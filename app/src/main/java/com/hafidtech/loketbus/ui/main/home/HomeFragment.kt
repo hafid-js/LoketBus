@@ -164,11 +164,11 @@ class HomeFragment : BaseBindingFragment() {
     }
 
     private fun initData() {
-        dataDari.add(TerminalModel("Terminal Pulo Gebang", "PGB"))
-        dataDari.add(TerminalModel("Terminal Kutoarjo", "KTJ"))
+        dataDari.add(TerminalModel("Terminal Pulo Gebang", "PGD"))
+        dataDari.add(TerminalModel("Terminal Depok", "DPK"))
 
-        dataTujuan.add(TerminalModel("Terminal Kebumen", "KBM"))
-        dataTujuan.add(TerminalModel("Terminal Arjosari", "ARJ"))
+        dataTujuan.add(TerminalModel("Terminal Ampera", "APR"))
+        dataTujuan.add(TerminalModel("Terminal Bengkulu", "BKL"))
 
         dataPenumpang.add(1)
         dataPenumpang.add(2)
@@ -177,6 +177,7 @@ class HomeFragment : BaseBindingFragment() {
         dataTipeBus.add("Bisnis")
         dataTipeBus.add("Ekonomi")
 
+        busRequest = BusRequest()
         busRequest.apply {
             date = getCurrentDate()
         }

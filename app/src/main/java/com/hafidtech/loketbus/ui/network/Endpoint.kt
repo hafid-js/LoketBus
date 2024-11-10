@@ -34,5 +34,5 @@ interface Endpoint {
         @Query("date") date: String?,
         @Query("dari") dari: String?,
         @Query("tujuan") tujuan: String?
-    ): Observable<Wrapper<BusResponse>>
+    ): Observable<Wrapper<ArrayList<BusResponse>>>
 }

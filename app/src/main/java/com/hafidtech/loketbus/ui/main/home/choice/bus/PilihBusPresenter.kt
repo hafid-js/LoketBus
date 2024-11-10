@@ -18,6 +18,7 @@ class PilihBusPresenter (private val view: PilihBusContract.View): PilihBusContr
     }
 
     override fun getBusList(busRequest: BusRequest) {
+        view.showLoading()
         val disposable = HttpClient.getInstance().getApi()!!.getBusList(
             busRequest.tipe,
             busRequest.penumpang.toString(),

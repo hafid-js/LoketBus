@@ -38,6 +38,7 @@ class ListBottomTerminalAdapter(
         fun bind(data: TerminalModel, itemAdapterCallback: ItemAdapterCallback) {
             itemView.apply {
                 binding.tvItemTitle.text = data.namaTerminal
+                binding.tvItemSub.text = data.codeTerminal
 
                 itemView.setOnClickListener {
                     itemAdapterCallback.onListBottomTerminalClick(it, data)
