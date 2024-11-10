@@ -1,5 +1,6 @@
 package com.hafidtech.loketbus.ui.main.home.choice.tiket
 
+import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import com.bagicode.bagicodebaseutils.utils.loadRoundedImage
 import com.bagicode.bagicodebaseutils.utils.visible
 import com.hafidtech.loketbus.R
 import com.hafidtech.loketbus.databinding.FragmentPilihKursiBinding
+import com.hafidtech.loketbus.ui.dialog.bottomsheet.ConfirmBottomSheet
 import com.hafidtech.loketbus.ui.model.BusRequest
 import com.hafidtech.loketbus.ui.model.response.BusResponse
 import com.hafidtech.loketbus.ui.model.response.KursiResponse
@@ -47,7 +49,11 @@ class PilihKursiFragment : BaseBindingFragment(), KursiAdapter.ItemKursiAdapterC
         binding.ivBus.loadRoundedImage(busParms?.image, 4)
         binding.btnLanjutkan.setOnClickListener{
             if (dataPick?.penumpang == listKursi.size) {
+                ConfirmBottomSheet.newInstance(object : ConfirmBottomSheet.Listener {
+                    override fun onOptionClick(dialog: Dialog, position: Int) {
 
+                    }
+                }, busParms!!, listKursi).show(parentFragmentManager, "")
             } else {
                 showSnackbarMessage(binding.btnLanjutkan, "Total kursi yang kamu pesan ${dataPick?.penumpang} slot",
                     Const.ToastType.Error)
