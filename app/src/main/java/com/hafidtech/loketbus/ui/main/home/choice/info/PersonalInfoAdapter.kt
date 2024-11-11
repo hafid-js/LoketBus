@@ -34,7 +34,6 @@ class PersonalInfoAdapter(
 
     inner class ViewHolder(binding: ItemPenumpangBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: String, itemAdapterCallback: ItemPenumpangAdapterCallback, position: Int) {
-//            val tvName: TextView = itemView.findViewById(R.id.tv_name)
             itemView.apply {
                 binding.tvName.text = data
                 binding.ivName.setOnClickListener{
