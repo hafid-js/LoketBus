@@ -47,6 +47,8 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
     private var dataPassenger = ArrayList<String>()
     private var emailContactParms : String = ""
 
+    lateinit var adapterPassenger : PersonalInfoAdapter
+
     override fun getFragmentView(): ViewBinding {
         binding = FragmentPersonalInfoBinding.inflate(layoutInflater)
         return binding
@@ -72,7 +74,7 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
         var userResponse = Gson().fromJson(user, LoginResponse::class.java)
         binding.tvEmail.text = userResponse.email
         dataPassenger.add(userResponse?.username!!)
-        var adapterPassenger = PersonalInfoAdapter(dataPassenger, this)
+        adapterPassenger = PersonalInfoAdapter(dataPassenger, this)
         val layoutManager = LinearLayoutManager(activity)
         binding.rvPassenger.layoutManager = layoutManager
         binding.rvPassenger.adapter = adapterPassenger
@@ -93,6 +95,12 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
     }
 
     override fun onitemPenumpangAdapterCallback(data: String, position: Int) {
+        InputEmailBottomSheet.newInstance(object : InputEmailBottomSheet.Listener {
+            override fun onClick(data: String) {
+                dataPassenger.set(position, data)
+                adapterPassenger.notifyDataSetChanged()
+            }
 
+        }, "Penumpang", "Silahkan masukkan nama lengkap", data).show(parentFragmentManager)
     }
 }
