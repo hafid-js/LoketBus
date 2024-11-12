@@ -81,6 +81,21 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
     }
 
     private fun initListener() {
+
+        binding.tvAddPassenger.setOnClickListener{
+            if (dataPassenger.size != dataPick?.penumpang) {
+                InputEmailBottomSheet.newInstance(object : InputEmailBottomSheet.Listener {
+                    override fun onClick(data: String) {
+                       dataPassenger.add(data)
+                        adapterPassenger.notifyDataSetChanged()
+                    }
+                }, "Penumpang", "Silahkan isi nama lengkap").show(parentFragmentManager, "")
+            } else {
+                showSnackbarMessage(binding.btnLanjutkan, "Total kursi yang kamu pesan ${dataPick?.penumpang} Slot", Const.ToastType.Error)
+            }
+        }
+
+
         binding.ivEmail.setOnClickListener{
             var emailParms = binding.tvEmail.text.toString()
 
