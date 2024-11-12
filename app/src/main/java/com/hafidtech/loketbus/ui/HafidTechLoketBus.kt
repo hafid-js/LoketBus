@@ -34,7 +34,7 @@ class HafidTechLoketBus : MultiDexApplication() {
     }
 
     fun setUser(user : String) {
-        getPreferences().edit().putString("PREFERENCE_USER", user)
+        getPreferences().edit().putString("PREFERENCE_USER", user).apply()
     }
 
     fun getUser() : String? {
@@ -45,5 +45,5 @@ class HafidTechLoketBus : MultiDexApplication() {
         getPreferences().edit().remove("PREFERENCE_TOKEN").apply()
         HttpClient.getInstance().buildRetrofitClient("")
     }
-}
 
+}

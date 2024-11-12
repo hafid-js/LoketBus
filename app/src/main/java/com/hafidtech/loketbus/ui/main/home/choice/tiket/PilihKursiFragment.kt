@@ -52,7 +52,7 @@ class PilihKursiFragment : BaseBindingFragment(), KursiAdapter.ItemKursiAdapterC
             if (dataPick?.penumpang == listKursi.size) {
                 ConfirmBottomSheet.newInstance(object : ConfirmBottomSheet.Listener {
                     override fun onOptionClick(dialog: Dialog, position: Int) {
-//                        dialog.dismiss()
+                        dialog.dismiss()
                         var bundle = Bundle()
                         bundle.putParcelable("data", busParms)
                         bundle.putParcelable("dataPick", dataPick)

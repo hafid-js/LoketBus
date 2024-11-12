@@ -56,6 +56,11 @@ class SigninFragment : BaseBindingFragment(), SigninContract.View {
 
         HafidTechLoketBus.getApp().setUser(json)
 
+        println(loginResponse.email)
+        println(loginResponse.username)
+
+        println("email password ${loginResponse.email} ${loginResponse.username}")
+
         changePage(MainActivity::class.java, null, activity, true)
     }
 

@@ -25,20 +25,20 @@ interface Endpoint {
     @POST("login.php")
     fun setLogin(
         @Field("email") email : String,
-        @Field("pass") pass : String,
+        @Field("pass") pass : String
     ) : Observable<Wrapper<LoginResponse>>
 
     @GET("search.php")
     fun getBusList(
-        @Query("tipe") tipe: String?,
-        @Query("penumpang") penumpang: String?,
-        @Query("date") date: String?,
-        @Query("dari") dari: String?,
-        @Query("tujuan") tujuan: String?
-    ): Observable<Wrapper<ArrayList<BusResponse>>>
+        @Query("tipe") tipe : String?,
+        @Query("penumpang") penumpang : String?,
+        @Query("date") date : String?,
+        @Query("dari") dari : String?,
+        @Query("tujuan") tujuan : String?
+    ) : Observable<Wrapper<ArrayList<BusResponse>>>
 
     @GET("kursi.php")
     fun getKursiList(
-        @Query("id_bus") id_bus: String?
-    ): Observable<Wrapper<ArrayList<KursiResponse>>>
+        @Query("id_bus") id_bus : String?
+    ) : Observable<Wrapper<ArrayList<KursiResponse>>>
 }
