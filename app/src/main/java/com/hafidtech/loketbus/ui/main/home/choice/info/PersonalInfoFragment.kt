@@ -18,6 +18,7 @@ import com.hafidtech.loketbus.R
 import com.hafidtech.loketbus.databinding.FragmentPersonalInfoBinding
 import com.hafidtech.loketbus.ui.HafidTechLoketBus
 import com.hafidtech.loketbus.ui.auth.AuthActivity
+import com.hafidtech.loketbus.ui.dialog.bottomsheet.InputEmailBottomSheet
 import com.hafidtech.loketbus.ui.main.MainActivity
 import com.hafidtech.loketbus.ui.model.BusRequest
 import com.hafidtech.loketbus.ui.model.response.BusResponse
@@ -44,6 +45,7 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
     private var dataKursi : ArrayList<KursiResponse>?=null
 
     private var dataPassenger = ArrayList<String>()
+    private var emailContactParms : String = ""
 
     override fun getFragmentView(): ViewBinding {
         binding = FragmentPersonalInfoBinding.inflate(layoutInflater)
@@ -59,7 +61,7 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
         initListener()
     }
 
-    private fun initListener() {
+    private fun initView() {
         binding.ivLogo.loadRoundedImage(busParms?.logo, 4)
         var totalParms = dataPick?.penumpang!! * busParms?.price?.toInt()!!
         binding.tvPrice.formatPrice(totalParms.toString())
@@ -67,17 +69,27 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
         binding.tvTime.text = "${busParms?.jam} WIB"
 
         var user = HafidTechLoketBus.getApp().getUser()
-            var userResponse = Gson().fromJson(user, LoginResponse::class.java)
-            binding.tvEmail.text = userResponse.email
-            dataPassenger.add(userResponse?.username!!)
-            var adapterPassenger = PersonalInfoAdapter(dataPassenger, this)
-            val layoutManager = LinearLayoutManager(activity)
-            binding.rvPassenger.layoutManager = layoutManager
-            binding.rvPassenger.adapter = adapterPassenger
+        var userResponse = Gson().fromJson(user, LoginResponse::class.java)
+        binding.tvEmail.text = userResponse.email
+        dataPassenger.add(userResponse?.username!!)
+        var adapterPassenger = PersonalInfoAdapter(dataPassenger, this)
+        val layoutManager = LinearLayoutManager(activity)
+        binding.rvPassenger.layoutManager = layoutManager
+        binding.rvPassenger.adapter = adapterPassenger
     }
 
-    private fun initView() {
+    private fun initListener() {
+        binding.ivEmail.setOnClickListener{
+            var emailParms = binding.tvEmail.text.toString()
 
+            InputEmailBottomSheet.newInstance(object : InputEmailBottomSheet.Listener {
+                override fun onClick(data: String) {
+                    emailContactParms = data
+                    binding.tvEmail.text = data
+                }
+
+            }, "Email", "Silahkan masukkan email salah penumpang", emailParms).show(parentFragmentManager)
+        }
     }
 
     override fun onitemPenumpangAdapterCallback(data: String, position: Int) {
