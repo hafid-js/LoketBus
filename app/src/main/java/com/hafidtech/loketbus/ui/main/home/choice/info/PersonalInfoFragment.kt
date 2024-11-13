@@ -49,7 +49,7 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
 
     private var dataPassenger = ArrayList<String>()
     private var emailContactParms : String = ""
-    lateinit var totalParms : Int = 0
+    private var totalParms : Int = 0
 
     lateinit var adapterPassenger : PersonalInfoAdapter
     lateinit var presenter: PersonalInfoPresenter
@@ -74,6 +74,7 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
 
     private fun initView() {
         binding.ivLogo.loadRoundedImage(busParms?.logo, 4)
+
         totalParms = dataPick?.penumpang!! * busParms?.price?.toInt()!!
         binding.tvPrice.formatPrice(totalParms.toString())
 
@@ -82,6 +83,8 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
         var user = HafidTechLoketBus.getApp().getUser()
         userResponse = Gson().fromJson(user, LoginResponse::class.java)
         binding.tvEmail.text = userResponse.email
+        emailContactParms = userResponse.email.toString()
+
         dataPassenger.add(userResponse?.username!!)
         adapterPassenger = PersonalInfoAdapter(dataPassenger, this)
         val layoutManager = LinearLayoutManager(activity)
@@ -91,12 +94,13 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
 
     private fun initListener() {
 
-        binding.tvAddPassenger.setOnClickListener{
+        binding.tvAddPassenger.setOnClickListener {
             if (dataPassenger.size != dataPick?.penumpang) {
-                InputEmailBottomSheet.newInstance(object : InputEmailBottomSheet.Listener {
+                InputEmailBottomSheet.newInstance(object :InputEmailBottomSheet.Listener {
                     override fun onClick(data: String) {
-                       dataPassenger.add(data)
+                        dataPassenger.add(data)
                         adapterPassenger.notifyDataSetChanged()
+
                     }
                 }, "Penumpang", "Silahkan isi nama lengkap").show(parentFragmentManager, "")
             } else {
@@ -104,17 +108,17 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
             }
         }
 
-
-        binding.ivEmail.setOnClickListener{
+        binding.ivEmail.setOnClickListener {
             var emailParms = binding.tvEmail.text.toString()
 
-            InputEmailBottomSheet.newInstance(object : InputEmailBottomSheet.Listener {
+            InputEmailBottomSheet.newInstance(object :InputEmailBottomSheet.Listener {
                 override fun onClick(data: String) {
                     emailContactParms = data
                     binding.tvEmail.text = data
-                }
 
-            }, "Email", "Silahkan masukkan email salah penumpang", emailParms).show(parentFragmentManager)
+                }
+            }, "Email", "Silahkan masukkan email salah satu penumpang",
+                emailParms).show(parentFragmentManager, "")
         }
         binding.btnLanjutkan.setOnClickListener{
             if (dataPassenger.size == dataPick?.penumpang) {
@@ -134,13 +138,14 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
     }
 
     override fun onitemPenumpangAdapterCallback(data: String, position: Int) {
-        InputEmailBottomSheet.newInstance(object : InputEmailBottomSheet.Listener {
+        InputEmailBottomSheet.newInstance(object :InputEmailBottomSheet.Listener {
             override fun onClick(data: String) {
                 dataPassenger.set(position, data)
                 adapterPassenger.notifyDataSetChanged()
-            }
 
-        }, "Penumpang", "Silahkan masukkan nama lengkap", data).show(parentFragmentManager)
+            }
+        }, "Penumpang", "Silahkan masukkan nama lengkap",
+            data).show(parentFragmentManager, "")
     }
 
     override fun onCheckoutBookingSuccess(id: String, view: View) {
@@ -162,9 +167,9 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
 
     private fun setCheckout(dataPassengerParms : ArrayList<String>,
                             dataKursiParms : ArrayList<KursiResponse>,
-                            busParms : BusResponse,
+                            busParms: BusResponse,
                             dataPickParms : BusRequest,
-                            view : View,
+                            view:View,
                             statusBayar : String,
                             jenisBayar : String) {
 
@@ -198,7 +203,6 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
             dataPickParms.tujuan,
             busParms.classBus,
             totalParms.toString()
-
         )
 
         presenter.setCheckoutBooking(checkoutRequest, view)
