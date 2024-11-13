@@ -25,5 +25,13 @@
     <fragment
         android:id="@+id/fragmentPersonalInfo"
         android:name="com.hafidtech.loketbus.ui.main.home.choice.info.PersonalInfoFragment"
+        tools:layout="@layout/fragment_personal_info">
+        <action android:id="@+id/action_success"
+            app:destination="@+id/fragmentSuccess"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentSuccess"
+        android:name="com.hafidtech.loketbus.ui.main.home.choice.success"
         tools:layout="@layout/fragment_personal_info" />
 </navigation>
