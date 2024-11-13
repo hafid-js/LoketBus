@@ -15,7 +15,7 @@
         android:id="@+id/navigation_mybookings"
         android:name="com.hafidtech.loketbus.ui.main.mybookings.MyBookingsFragment"
         android:label="@string/my_bookings"
-        tools:layout="@layout/fragment_mybookings" />
+        tools:layout="@layout/fragment_mybooking" />
 
     <fragment
         android:id="@+id/navigation_notifications"
