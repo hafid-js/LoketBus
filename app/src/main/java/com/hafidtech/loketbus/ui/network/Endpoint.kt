@@ -1,10 +1,12 @@
 package com.hafidtech.loketbus.ui.network
 
 import com.hafidtech.loketbus.ui.model.Wrapper
+import com.hafidtech.loketbus.ui.model.request.CheckoutRequest
 import com.hafidtech.loketbus.ui.model.response.BusResponse
 import com.hafidtech.loketbus.ui.model.response.KursiResponse
 import com.hafidtech.loketbus.ui.model.response.LoginResponse
 import io.reactivex.Observable
+import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -41,4 +43,16 @@ interface Endpoint {
     fun getKursiList(
         @Query("id_bus") id_bus : String?
     ) : Observable<Wrapper<ArrayList<KursiResponse>>>
+
+    @POST("checkout.php")
+    fun setBooking (
+        @Body checkoutRequest: CheckoutRequest
+    ): Observable<Wrapper<LoginResponse>>
+
+    @FormUrlEncoded
+    @POST("checkout_update.php")
+    fun setBookingUpdate(
+        @Field("id_tiket") idTiket: String,
+        @Field("status") statusPembayaran: String
+    ): Observable<Wrapper<Any>>
 }
