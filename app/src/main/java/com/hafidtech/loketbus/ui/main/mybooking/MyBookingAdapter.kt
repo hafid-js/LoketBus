@@ -10,9 +10,10 @@ import com.hafidtech.loketbus.R
 import com.hafidtech.loketbus.databinding.ItemMybookingBinding
 import com.hafidtech.loketbus.ui.model.response.MyBookingResponse
 
-class MyBookingAdapter(
+class MyBookingAdapter (
     private val listData : ArrayList<MyBookingResponse>,
-    private val itemAdapterCallback : ItemAdapterCallback) : RecyclerView.Adapter<MyBookingAdapter.ViewHolder>(){
+    private val itemAdapterCallback : ItemAdapterCallback
+) : RecyclerView.Adapter <MyBookingAdapter.ViewHolder>() {
 
         lateinit var binding : ItemMybookingBinding
 
