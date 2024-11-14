@@ -1,4 +1,4 @@
-package com.hafidtech.loketbus.ui.main.mybookings
+package com.hafidtech.loketbus.ui.main.mybooking
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.hafidtech.loketbus.databinding.FragmentMybookingsBinding
+import com.hafidtech.loketbus.databinding.FragmentMybookingBinding
 
-class MyBookingsFragment : Fragment() {
+class MyBookingFragment : Fragment() {
 
-    private var _binding: FragmentMybookingsBinding? = null
+    private var _binding: FragmentMybookingBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -23,12 +23,12 @@ class MyBookingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val myBookingsViewModel =
-            ViewModelProvider(this).get(MyBookingsViewModel::class.java)
+            ViewModelProvider(this).get(MyBookingViewModel::class.java)
 
-        _binding = FragmentMybookingsBinding.inflate(inflater, container, false)
+        _binding = FragmentMybookingBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textMybookings
+        val textView: TextView = binding.textView12
         myBookingsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }

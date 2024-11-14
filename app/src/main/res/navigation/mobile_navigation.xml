@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_mybookings"
-        android:name="com.hafidtech.loketbus.ui.main.mybookings.MyBookingsFragment"
+        android:name="com.hafidtech.loketbus.ui.main.mybooking.MyBookingFragment"
         android:label="@string/my_bookings"
         tools:layout="@layout/fragment_mybooking" />
 
