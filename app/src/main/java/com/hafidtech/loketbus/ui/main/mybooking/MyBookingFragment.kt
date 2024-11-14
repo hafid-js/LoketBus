@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.bagicode.bagicodebaseutils.basewithbinding.BaseBindingFragment
 import com.bagicode.bagicodebaseutils.utils.Const
+import com.bagicode.bagicodebaseutils.utils.changePage
 import com.google.gson.Gson
 import com.hafidtech.loketbus.databinding.FragmentMybookingBinding
 import com.hafidtech.loketbus.ui.HafidTechLoketBus
 import com.hafidtech.loketbus.ui.main.home.choice.bus.PilihBusAdapter
+import com.hafidtech.loketbus.ui.main.mybooking.detail.MyBookingDetailActivity
 import com.hafidtech.loketbus.ui.model.response.BusResponse
 import com.hafidtech.loketbus.ui.model.response.LoginResponse
 import com.hafidtech.loketbus.ui.model.response.MyBookingResponse
@@ -55,5 +57,8 @@ class MyBookingFragment : BaseBindingFragment(), MyBookingAdapter.ItemAdapterCal
 
 
     override fun onListMyBookingClick(v: View, data: MyBookingResponse) {
+        var bundle = Bundle()
+        bundle.putParcelable("data", data)
+        changePage(MyBookingDetailActivity::class.java, bundle, requireActivity(), false)
     }
 }

@@ -1,9 +1,12 @@
 package com.hafidtech.loketbus.ui.model.response
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class MyBookingResponse(
     @Expose
     @SerializedName("bus_logo")
@@ -40,7 +43,7 @@ data class MyBookingResponse(
     var pembayaran: String?,
     @Expose
     @SerializedName("penumpang")
-    var penumpang: List<Penumpang?>?,
+    var penumpang: List<Penumpang>?,
     @Expose
     @SerializedName("status_bayar")
     var statusBayar: String?,
@@ -56,4 +59,4 @@ data class MyBookingResponse(
     @Expose
     @SerializedName("total_price")
     var totalPrice: String?
-)
+) : Parcelable
