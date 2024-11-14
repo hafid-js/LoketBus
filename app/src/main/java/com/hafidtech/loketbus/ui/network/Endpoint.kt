@@ -5,6 +5,7 @@ import com.hafidtech.loketbus.ui.model.request.CheckoutRequest
 import com.hafidtech.loketbus.ui.model.response.BusResponse
 import com.hafidtech.loketbus.ui.model.response.KursiResponse
 import com.hafidtech.loketbus.ui.model.response.LoginResponse
+import com.hafidtech.loketbus.ui.model.response.MyBookingResponse
 import io.reactivex.Observable
 import retrofit2.http.Body
 import retrofit2.http.Field
@@ -55,4 +56,10 @@ interface Endpoint {
         @Field("id_tiket") idTiket: String,
         @Field("status") statusPembayaran: String
     ): Observable<Wrapper<Any>>
+
+
+    @GET("booking.php")
+    fun getMyBookingList(
+        @Query("id_user") idUser : String?
+    ) : Observable<Wrapper<ArrayList<MyBookingResponse>>>
 }
