@@ -46,7 +46,7 @@
 
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/tv_code_from"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="JKT"
@@ -56,18 +56,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView17"
+            android:id="@+id/tv_location_from"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Jakarta"
             android:fontFamily="@font/montserrat"
             android:textSize="9sp"
             android:layout_marginTop="7dp"
-            app:layout_constraintStart_toStartOf="@+id/textView14"
-            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+            app:layout_constraintStart_toStartOf="@+id/tv_code_from"
+            app:layout_constraintTop_toBottomOf="@+id/tv_code_from" />
 
         <TextView
-            android:id="@+id/textView19"
+            android:id="@+id/tv_code_to"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="PWJ"
@@ -77,24 +77,24 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/tv_location_to"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Purworejo"
             android:fontFamily="@font/montserrat"
             android:textSize="9sp"
             android:layout_marginTop="7dp"
-            app:layout_constraintEnd_toEndOf="@+id/textView19"
-            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+            app:layout_constraintEnd_toEndOf="@+id/tv_code_to"
+            app:layout_constraintTop_toBottomOf="@+id/tv_code_to" />
 
         <ImageView
             android:id="@+id/imageView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/textView17"
-            app:layout_constraintEnd_toStartOf="@+id/textView19"
-            app:layout_constraintStart_toEndOf="@+id/textView14"
-            app:layout_constraintTop_toTopOf="@+id/textView14"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_location_from"
+            app:layout_constraintEnd_toStartOf="@+id/tv_code_to"
+            app:layout_constraintStart_toEndOf="@+id/tv_code_from"
+            app:layout_constraintTop_toTopOf="@+id/tv_code_from"
             app:srcCompat="@drawable/ic_from_to" />
 
         <View
@@ -105,7 +105,7 @@
             android:background="#000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_location_from" />
 
         <TextView
             style="@style/montserrat.11grey"
@@ -119,10 +119,10 @@
 
         <TextView
             style="@style/montserrat.14black"
-            android:id="@+id/textView25"
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Intan Maulidina"
+            android:text="Mulyono"
             app:layout_constraintStart_toStartOf="@+id/textView24"
             app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
@@ -133,15 +133,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Tanggal"
-            app:layout_constraintStart_toStartOf="@+id/textView25"
-            app:layout_constraintTop_toBottomOf="@+id/textView25" />
+            app:layout_constraintStart_toStartOf="@+id/tv_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
         <TextView
+            android:id="@+id/tv_date"
             style="@style/montserrat.14black"
-            android:id="@+id/textView27"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="14 November 2024"
             app:layout_constraintStart_toStartOf="@+id/textView26"
             app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
@@ -152,11 +152,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Armada"
-            app:layout_constraintStart_toStartOf="@+id/textView27"
-            app:layout_constraintTop_toBottomOf="@+id/textView27" />
+            app:layout_constraintStart_toStartOf="@+id/tv_date"
+            app:layout_constraintTop_toBottomOf="@+id/tv_date" />
 
         <ImageView
-            android:id="@+id/imageView15"
+            android:id="@+id/iv_logo"
             android:layout_width="100dp"
             android:layout_height="30dp"
             app:layout_constraintStart_toStartOf="@+id/textView28"
@@ -170,12 +170,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Nomor Bus"
-            app:layout_constraintStart_toStartOf="@+id/imageView15"
-            app:layout_constraintTop_toBottomOf="@+id/imageView15" />
+            app:layout_constraintStart_toStartOf="@+id/iv_logo"
+            app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
 
         <TextView
             style="@style/montserrat.14black"
-            android:id="@+id/textView30"
+            android:id="@+id/tv_plat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
@@ -194,12 +194,12 @@
 
         <TextView
             style="@style/montserrat.14black"
-            android:id="@+id/textView32"
+            android:id="@+id/tv_kursi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="A4"
             app:layout_constraintEnd_toEndOf="@+id/textView31"
-            app:layout_constraintTop_toTopOf="@+id/textView25" />
+            app:layout_constraintTop_toTopOf="@+id/tv_name" />
 
         <TextView
             style="@style/montserrat.11grey"
@@ -207,17 +207,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Keberangkatan"
-            app:layout_constraintEnd_toEndOf="@+id/textView32"
+            app:layout_constraintEnd_toEndOf="@+id/tv_kursi"
             app:layout_constraintTop_toTopOf="@+id/textView26" />
 
         <TextView
             style="@style/montserrat.14black"
-            android:id="@+id/textView34"
+            android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="16:00 WIB"
             app:layout_constraintEnd_toEndOf="@+id/textView33"
-            app:layout_constraintTop_toTopOf="@+id/textView27" />
+            app:layout_constraintTop_toTopOf="@+id/tv_date" />
 
         <TextView
             style="@style/montserrat.11grey"
@@ -225,17 +225,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pembayaran"
-            app:layout_constraintEnd_toEndOf="@+id/textView34"
+            app:layout_constraintEnd_toEndOf="@+id/tv_time"
             app:layout_constraintTop_toTopOf="@+id/textView28" />
 
         <TextView
             style="@style/montserrat.14black"
-            android:id="@+id/textView36"
+            android:id="@+id/tv_trans"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Transfer Bank"
             app:layout_constraintEnd_toEndOf="@+id/textView35"
-            app:layout_constraintTop_toTopOf="@+id/imageView15" />
+            app:layout_constraintTop_toTopOf="@+id/iv_logo" />
 
         <TextView
             style="@style/montserrat.11grey"
@@ -243,17 +243,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nomor Booking"
-            app:layout_constraintEnd_toEndOf="@+id/textView36"
+            app:layout_constraintEnd_toEndOf="@+id/tv_trans"
             app:layout_constraintTop_toTopOf="@+id/textView29" />
 
         <TextView
             style="@style/montserrat.14black"
-            android:id="@+id/textView38"
+            android:id="@+id/tv_booking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="P30574432"
             app:layout_constraintEnd_toEndOf="@+id/textView37"
-            app:layout_constraintTop_toTopOf="@+id/textView30" />
+            app:layout_constraintTop_toTopOf="@+id/tv_plat" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
