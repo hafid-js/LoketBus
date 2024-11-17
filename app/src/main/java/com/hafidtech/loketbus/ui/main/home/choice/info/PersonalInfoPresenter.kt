@@ -11,16 +11,15 @@ import io.reactivex.schedulers.Schedulers
 
 class PersonalInfoPresenter (private val view: PersonalInfoContract.View): PersonalInfoContract.Presenter {
 
-    private val mCompositeDisposable : CompositeDisposable?
-    init {
-        this.mCompositeDisposable = CompositeDisposable()
-    }
-    override fun subscribe() {
+    private val mCompositeDispossable : CompositeDisposable?
 
+    init {
+        this.mCompositeDispossable = CompositeDisposable()
     }
 
     override fun setCheckoutBooking(checkoutRequest: CheckoutRequest, viewPars : View) {
         view.showLoading()
+
         val disposable = HttpClient.getInstance().getApi()!!.setBooking(
             checkoutRequest
         )
@@ -41,12 +40,12 @@ class PersonalInfoPresenter (private val view: PersonalInfoContract.View): Perso
                     view.onCheckoutFailed(it.getErrorBodyMessage())
                 }
             )
-        mCompositeDisposable?.add(disposable)
-
+        mCompositeDispossable?.add(disposable)
     }
 
-    override fun setCheckoutUpdate(idTiket:String, statusPembayaran: String, viewPars : View) {
+    override fun setCheckoutUpdate(idTiket:String, statusPembayaran:String, viewPars : View) {
         view.showLoading()
+
         val disposable = HttpClient.getInstance().getApi()!!.setBookingUpdate(
             idTiket, statusPembayaran
         )
@@ -67,11 +66,12 @@ class PersonalInfoPresenter (private val view: PersonalInfoContract.View): Perso
                     view.onCheckoutUpdateFailed(it.getErrorBodyMessage())
                 }
             )
-        mCompositeDisposable?.add(disposable)
-
+        mCompositeDispossable?.add(disposable)
     }
 
+    override fun subscribe() { }
+
     override fun unSubscribe() {
-        mCompositeDisposable!!.clear()
+        mCompositeDispossable!!.clear()
     }
 }

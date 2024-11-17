@@ -24,10 +24,10 @@
         tools:targetApi="31">
         <activity
             android:name=".ui.main.mybooking.detail.MyBookingDetailActivity"
-            android:exported="false" />
+            android:theme="@style/Theme.AdsAdvance.NoActionBar" />
         <activity
             android:name=".ui.main.home.HomeDetailActivity"
-            android:exported="false" />
+            android:theme="@style/Theme.AdsAdvance.NoActionBar" />
         <activity
             android:name=".ui.main.MainActivity"
             android:theme="@style/Theme.AdsAdvance.NoActionBar" />

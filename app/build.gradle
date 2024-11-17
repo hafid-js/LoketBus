@@ -89,6 +89,7 @@ dependencies {
 
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.preference:preference-ktx:1.1.1'
+    implementation 'com.google.zxing:core:3.4.1'
 
     implementation 'androidx.work:work-runtime-ktx:2.7.0'
 

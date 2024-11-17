@@ -1,5 +1,7 @@
 package com.hafidtech.loketbus.ui.main.mybooking.detail
 
+import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +13,13 @@ import com.bagicode.bagicodebaseutils.utils.loadRoundedImage
 import com.hafidtech.loketbus.R
 import com.hafidtech.loketbus.databinding.ActivityMyBookingDetailBinding
 import com.hafidtech.loketbus.ui.model.response.MyBookingResponse
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.EncodeHintType
+import com.google.zxing.Writer
+import com.google.zxing.common.BitMatrix
+import com.google.zxing.oned.Code128Writer
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
+import java.util.Hashtable
 
 class MyBookingDetailActivity : BaseBindingActivity() {
 
@@ -54,5 +63,28 @@ class MyBookingDetailActivity : BaseBindingActivity() {
 
         binding.tvPlat.text = data?.busPlat
         binding.tvBooking.text = data?.idTiket
+
+        var barcodeDummy = generateBarcode(data.idTiket!!)
+        binding.ivBarcode.setImageBitmap(barcodeDummy)
     }
+
+    private fun generateBarcode(valueParms : String) : Bitmap {
+        val hintMap : Hashtable<EncodeHintType, ErrorCorrectionLevel> =
+            Hashtable<EncodeHintType, ErrorCorrectionLevel>()
+        hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L)
+        val codeWriter : Writer
+        codeWriter = Code128Writer()
+        val byteMatrix: BitMatrix =
+            codeWriter.encode(valueParms, BarcodeFormat.CODE_128, 400, 200, hintMap)
+        val width = byteMatrix.width
+        val height = byteMatrix.height
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        for (i in 0 until width) {
+            for (j in 0 until height) {
+                bitmap.setPixel(i, j, if (byteMatrix[i, j]) Color.BLACK else Color.WHITE)
+            }
+        }
+    }
+
+
 }

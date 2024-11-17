@@ -254,6 +254,27 @@
             android:text="P30574432"
             app:layout_constraintEnd_toEndOf="@+id/textView37"
             app:layout_constraintTop_toTopOf="@+id/tv_plat" />
+
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="27dp"
+            android:background="#000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_plat" />
+
+        <ImageView
+            android:id="@+id/iv_barcode"
+            android:layout_width="0dp"
+            android:layout_height="109dp"
+            android:layout_marginTop="27dp"
+            app:layout_constraintEnd_toEndOf="@+id/view4"
+            app:layout_constraintStart_toStartOf="@+id/view4"
+            app:layout_constraintTop_toBottomOf="@+id/view4"
+            tools:srcCompat="@tools:sample/avatars" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
