@@ -22,12 +22,21 @@ import com.hafidtech.loketbus.ui.auth.AuthActivity
 import com.hafidtech.loketbus.ui.dialog.bottomsheet.InputEmailBottomSheet
 import com.hafidtech.loketbus.ui.main.MainActivity
 import com.hafidtech.loketbus.ui.model.BusRequest
+import com.hafidtech.loketbus.ui.model.CustomerPayModel
 import com.hafidtech.loketbus.ui.model.request.CheckoutRequest
 import com.hafidtech.loketbus.ui.model.request.Penumpang
 import com.hafidtech.loketbus.ui.model.response.BusResponse
 import com.hafidtech.loketbus.ui.model.response.KursiResponse
 import com.hafidtech.loketbus.ui.model.response.LoginResponse
+import com.hafidtech.loketbus.ui.network.BuildConfig
 import com.hafidtech.loketbus.ui.network.HttpClient
+import com.midtrans.sdk.corekit.callback.TransactionFinishedCallback
+import com.midtrans.sdk.corekit.core.MidtransSDK
+import com.midtrans.sdk.corekit.core.PaymentMethod
+import com.midtrans.sdk.corekit.core.UIKitCustomSetting
+import com.midtrans.sdk.corekit.core.themes.CustomColorTheme
+import com.midtrans.sdk.corekit.models.snap.TransactionResult
+import com.midtrans.sdk.uikit.SdkUIFlowBuilder
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -39,7 +48,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [PersonalInfoFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenumpangAdapterCallback, PersonalInfoContract.View {
+class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenumpangAdapterCallback, PersonalInfoContract.View, TransactionFinishedCallback {
 
     private lateinit var binding : FragmentPersonalInfoBinding
 
@@ -54,6 +63,9 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
     lateinit var adapterPassenger : PersonalInfoAdapter
     lateinit var presenter: PersonalInfoPresenter
     lateinit var userResponse: LoginResponse
+
+    private  lateinit var viewPay : View
+    private var idTiketParms : String = ""
 
 
     override fun getFragmentView(): ViewBinding {
@@ -122,6 +134,20 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
         }
         binding.btnLanjutkan.setOnClickListener{
             if (dataPassenger.size == dataPick?.penumpang) {
+
+                viewPay = it
+
+                initMidtransSDK()
+                CustomerPayModel().userDetails(
+                    "Desya Chairul Nisa",
+                    "desya@gmail.com",
+                    "62882329156134",
+                    "jl.taman sari no 34",
+                    "Jakarta Timur",
+                    "13260",
+                    "IDN"
+                )
+
                 setCheckout(
                     dataPassenger,
                     dataKursi!!,
@@ -149,11 +175,21 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
     }
 
     override fun onCheckoutBookingSuccess(id: String, view: View) {
-        Navigation.findNavController(view).navigate(R.id.action_success, null)
+        idTiketParms = id
+        MidtransSDK.getInstance()
+        MidtransSDK.getInstance().transactionRequest = CustomerPayModel.transactionRequest(
+            id,
+            totalParms,
+            1,
+            "Beli tiket bus dengan id ${id}"
+        )
+        MidtransSDK.getInstance().startPaymentUiFlow(
+            requireActivity(), PaymentMethod.BANK_TRANSFER_BCA
+        )
     }
 
     override fun onCheckoutUpdateSuccess(message: String, view: View) {
-
+        Navigation.findNavController(view).navigate(R.id.action_success, null)
     }
 
     override fun onCheckoutUpdateFailed(message: String) {
@@ -206,6 +242,50 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
         )
 
         presenter.setCheckoutBooking(checkoutRequest, view)
+
+    }
+
+    private fun initMidtransSDK() {
+        val uisetting = UIKitCustomSetting()
+        uisetting.isShowPaymentStatus = true
+        uisetting.isSkipCustomerDetailsPages = true
+
+         SdkUIFlowBuilder.init()
+             .setContext(requireContext())
+             .setMerchantBaseUrl(BuildConfig.BASE_URL_PAY)
+             .setClientKey(BuildConfig.CLIENT_KEY)
+             .setTransactionFinishedCallback(this)
+             .enableLog(true)
+             .setColorTheme(
+                 CustomColorTheme("#AA55FF", "#1A45BC","#AA55FF")
+             )
+             .buildSDK()
+    }
+
+    override fun onTransactionFinished(result : TransactionResult) {
+        if (result.response != null) {
+            when (result.status) {
+                TransactionResult.STATUS_SUCCESS -> {
+                    presenter.setCheckoutUpdate(idTiketParms, "done", viewPay)
+                }
+                TransactionResult.STATUS_PENDING -> {
+                    presenter.setCheckoutUpdate(idTiketParms, "pending", viewPay)
+                }
+                TransactionResult.STATUS_FAILED -> {
+                    presenter.setCheckoutUpdate(idTiketParms, "failed", viewPay)
+                }
+            }
+
+            result.response.validationMessages
+        } else if (result.isTransactionCanceled) {
+            showSnackbarMessage(binding.btnLanjutkan, "Transaksi ini dibatalkan", Const.ToastType.Error)
+        } else {
+            if (result.status.equals(TransactionResult.STATUS_INVALID, true)) {
+                showSnackbarMessage(binding.btnLanjutkan, "Transaksi ini invalid", Const.ToastType.Error)
+            } else {
+                showSnackbarMessage(binding.btnLanjutkan, "Transaksi ini finish with failed", Const.ToastType.Error)
+            }
+        }
 
     }
 }
