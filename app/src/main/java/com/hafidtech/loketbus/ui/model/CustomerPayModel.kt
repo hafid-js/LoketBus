@@ -1,35 +1,31 @@
 package com.hafidtech.loketbus.ui.model
 
-import com.hafidtech.loketbus.ui.utils.Const
-import com.midtrans.sdk.corekit.core.Constants
-import com.midtrans.sdk.corekit.core.LocalDataHandler
+import com.hafidtech.loketbus.ui.handler.Authentication
+import com.hafidtech.loketbus.ui.handler.BankType
+import com.hafidtech.loketbus.ui.handler.Constants
+import com.hafidtech.loketbus.ui.handler.LocalDataHandler
+import com.hafidtech.loketbus.ui.handler.UserAddress
+import com.hafidtech.loketbus.ui.handler.UserDetail
 import com.midtrans.sdk.corekit.core.TransactionRequest
-import com.midtrans.sdk.corekit.models.BankType
 import com.midtrans.sdk.corekit.models.CustomerDetails
 import com.midtrans.sdk.corekit.models.ItemDetails
-import com.midtrans.sdk.corekit.models.UserAddress
-import com.midtrans.sdk.corekit.models.UserDetail
-import com.midtrans.sdk.corekit.models.snap.Authentication
 import com.midtrans.sdk.corekit.models.snap.CreditCard
-import java.util.ArrayList
 import java.util.UUID
-import kotlin.collections.ArrayList
 
 class CustomerPayModel {
-
-    fun userDetails (
+    fun userDetails(
         nama : String?,
         email : String?,
         nohp : String?,
         address : String?,
         city : String?,
-        codePos : String?,
+        codepos : String?,
         country : String?,
     ) {
         var userDetail : UserDetail?
         userDetail = LocalDataHandler.readObject("user_details", UserDetail::class.java)
 
-        if (userDetail == null) {
+        if (userDetail == null){
             userDetail = UserDetail()
             userDetail.userFullName = nama
             userDetail.email = email
@@ -41,12 +37,12 @@ class CustomerPayModel {
             userAddress.address = address
             userAddress.city = city
             userAddress.country = country
-            userAddress.zipcode = codePos
+            userAddress.zipcode = codepos
             userAddress.addressType = Constants.ADDRESS_TYPE_BOTH
 
             userAddresses.add(userAddress)
             userDetail.userAddresses = ArrayList(userAddresses)
-            LocalDataHandler.saveObject("user_detail", userDetail)
+            LocalDataHandler.saveObject("_user_detail", userDetail)
         }
     }
 
@@ -54,18 +50,19 @@ class CustomerPayModel {
         fun customerDetails() : CustomerDetails {
             val customerDetails = CustomerDetails()
             customerDetails.firstName = "Desya"
-            customerDetails.phone = "62882329156134"
+            customerDetails.phone = "6285758145631"
             customerDetails.email = "desya@gmail.com"
             return customerDetails
         }
 
-        fun transactionRequest (
+        fun transactonRequest(
             id : String?,
             price : Int,
             qty : Int,
-            name : String?
+            name : String?,
         ) : TransactionRequest {
-            val transactionRequest = TransactionRequest(System.currentTimeMillis().toString()+" ", price.toDouble())
+            val transactionRequest =
+                TransactionRequest(System.currentTimeMillis().toString()+" ", price.toDouble())
             transactionRequest.customerDetails = customerDetails()
             val details = ItemDetails(id, price.toDouble(), qty, name)
             val itemDetails = ArrayList<ItemDetails>()
@@ -75,11 +72,11 @@ class CustomerPayModel {
             val creditCard = CreditCard()
             creditCard.isSaveCard = false
             creditCard.authentication = Authentication.AUTH_RBA
-            creditCard.bank = BankType.BCA
+            creditCard.bank = BankType.MANDIRI
 
             transactionRequest.creditCard = creditCard
             return transactionRequest
-
         }
     }
+
 }

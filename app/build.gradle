@@ -69,7 +69,8 @@ dependencies {
     implementation libs.material
     implementation libs.androidx.activity
     implementation libs.androidx.constraintlayout
-    implementation files('/Users/gobedsaseno/AndroidStudioProjects/LoketBus/bagicodeBaseUtils-release/bagicodeBaseUtils-release.aar')
+//    implementation files('/Users/gobedsaseno/AndroidStudioProjects/LoketBus/bagicodeBaseUtils-release/bagicodeBaseUtils-release.aar')
+    implementation files('/Users/gobedsaseno/Downloads/AdsAdvance/bagicodeBaseUtils-release/bagicodeBaseUtils-release.aar')
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
@@ -90,7 +91,7 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation 'com.google.zxing:core:3.4.1'
-    implementation 'com.midtrans:uikit:1.23.1-SANDBOX'
+    implementation 'com.midtrans:uikit:2.0.0-SANDBOX'
 
     implementation 'androidx.work:work-runtime-ktx:2.7.0'
 

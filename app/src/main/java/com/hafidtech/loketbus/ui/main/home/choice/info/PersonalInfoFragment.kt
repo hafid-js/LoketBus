@@ -38,35 +38,27 @@ import com.midtrans.sdk.corekit.core.themes.CustomColorTheme
 import com.midtrans.sdk.corekit.models.snap.TransactionResult
 import com.midtrans.sdk.uikit.SdkUIFlowBuilder
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class PersonalInfoFragment : BaseBindingFragment(),
+    PersonalInfoAdapter.ItemPenumpangAdapterCallback,
+    PersonalInfoContract.View,
+    TransactionFinishedCallback {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PersonalInfoFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenumpangAdapterCallback, PersonalInfoContract.View, TransactionFinishedCallback {
+    private lateinit var binding: FragmentPersonalInfoBinding
 
-    private lateinit var binding : FragmentPersonalInfoBinding
-
-    private var busParms : BusResponse?=null
-    private var dataPick : BusRequest?=null
-    private var dataKursi : ArrayList<KursiResponse>?=null
+    private var busParms: BusResponse? = null
+    private var dataPick: BusRequest? = null
+    private var dataKursi: ArrayList<KursiResponse>? = null
 
     private var dataPassenger = ArrayList<String>()
-    private var emailContactParms : String = ""
-    private var totalParms : Int = 0
+    private var emailContactParms: String = ""
+    private var totalParms: Int = 0
 
-    lateinit var adapterPassenger : PersonalInfoAdapter
+    lateinit var adapterPassenger: PersonalInfoAdapter
     lateinit var presenter: PersonalInfoPresenter
     lateinit var userResponse: LoginResponse
 
-    private  lateinit var viewPay : View
-    private var idTiketParms : String = ""
-
+    private lateinit var viewPay: View
+    private var idTiketParms: String = ""
 
     override fun getFragmentView(): ViewBinding {
         binding = FragmentPersonalInfoBinding.inflate(layoutInflater)
@@ -74,17 +66,18 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
     }
 
     override fun onBindView() {
-       busParms = arguments?.getParcelable("data")
+        busParms = arguments?.getParcelable("data")
         dataPick = arguments?.getParcelable("dataPick")
         dataKursi = arguments?.getParcelableArrayList("dataKursi")
 
         presenter = PersonalInfoPresenter(this)
 
-        initView()
+        initViewData()
         initListener()
+
     }
 
-    private fun initView() {
+    private fun initViewData() {
         binding.ivLogo.loadRoundedImage(busParms?.logo, 4)
 
         totalParms = dataPick?.penumpang!! * busParms?.price?.toInt()!!
@@ -108,7 +101,7 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
 
         binding.tvAddPassenger.setOnClickListener {
             if (dataPassenger.size != dataPick?.penumpang) {
-                InputEmailBottomSheet.newInstance(object :InputEmailBottomSheet.Listener {
+                InputEmailBottomSheet.newInstance(object : InputEmailBottomSheet.Listener {
                     override fun onClick(data: String) {
                         dataPassenger.add(data)
                         adapterPassenger.notifyDataSetChanged()
@@ -116,35 +109,42 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
                     }
                 }, "Penumpang", "Silahkan isi nama lengkap").show(parentFragmentManager, "")
             } else {
-                showSnackbarMessage(binding.btnLanjutkan, "Total kursi yang kamu pesan ${dataPick?.penumpang} Slot", Const.ToastType.Error)
+                showSnackbarMessage(
+                    binding.btnLanjutkan,
+                    "Total kursi yang kamu pesan ${dataPick?.penumpang} Slot",
+                    Const.ToastType.Error
+                )
             }
         }
 
         binding.ivEmail.setOnClickListener {
             var emailParms = binding.tvEmail.text.toString()
 
-            InputEmailBottomSheet.newInstance(object :InputEmailBottomSheet.Listener {
-                override fun onClick(data: String) {
-                    emailContactParms = data
-                    binding.tvEmail.text = data
+            InputEmailBottomSheet.newInstance(
+                object : InputEmailBottomSheet.Listener {
+                    override fun onClick(data: String) {
+                        emailContactParms = data
+                        binding.tvEmail.text = data
 
-                }
-            }, "Email", "Silahkan masukkan email salah satu penumpang",
-                emailParms).show(parentFragmentManager, "")
+                    }
+                }, "Email", "Silahkan masukkan email salah satu penumpang",
+                emailParms
+            ).show(parentFragmentManager, "")
         }
-        binding.btnLanjutkan.setOnClickListener{
+
+        binding.btnLanjutkan.setOnClickListener {
             if (dataPassenger.size == dataPick?.penumpang) {
 
                 viewPay = it
 
                 initMidtransSDK()
                 CustomerPayModel().userDetails(
-                    "Desya Chairul Nisa",
+                    "Desya",
                     "desya@gmail.com",
-                    "62882329156134",
-                    "jl.taman sari no 34",
-                    "Jakarta Timur",
-                    "13260",
+                    "6285758145631",
+                    "Jl.Taman sari",
+                    "Jakarta Barat",
+                    "38512",
                     "IDN"
                 )
 
@@ -158,66 +158,74 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
                     "transfer"
                 )
             } else {
-                showSnackbarMessage(binding.btnLanjutkan, "Total kursi yang kamu pesan ${dataPick?.penumpang} Slot", Const.ToastType.Error)
+                showSnackbarMessage(
+                    binding.btnLanjutkan,
+                    "Total kursi yang kamu pesan ${dataPick?.penumpang} Slot",
+                    Const.ToastType.Error
+                )
             }
         }
     }
 
     override fun onitemPenumpangAdapterCallback(data: String, position: Int) {
-        InputEmailBottomSheet.newInstance(object :InputEmailBottomSheet.Listener {
-            override fun onClick(data: String) {
-                dataPassenger.set(position, data)
-                adapterPassenger.notifyDataSetChanged()
+        InputEmailBottomSheet.newInstance(
+            object : InputEmailBottomSheet.Listener {
+                override fun onClick(data: String) {
+                    dataPassenger.set(position, data)
+                    adapterPassenger.notifyDataSetChanged()
 
-            }
-        }, "Penumpang", "Silahkan masukkan nama lengkap",
-            data).show(parentFragmentManager, "")
+                }
+            }, "Penumpang", "Silahkan masukkan nama lengkap",
+            data
+        ).show(parentFragmentManager, "")
     }
 
     override fun onCheckoutBookingSuccess(id: String, view: View) {
+
         idTiketParms = id
-        MidtransSDK.getInstance()
-        MidtransSDK.getInstance().transactionRequest = CustomerPayModel.transactionRequest(
+        MidtransSDK.getInstance().transactionRequest = CustomerPayModel.transactonRequest(
             id,
             totalParms,
             1,
             "Beli tiket bus dengan id ${id}"
         )
         MidtransSDK.getInstance().startPaymentUiFlow(
-            requireActivity(), PaymentMethod.BANK_TRANSFER_BCA
+            requireActivity(), PaymentMethod.BANK_TRANSFER_MANDIRI
         )
     }
 
-    override fun onCheckoutUpdateSuccess(message: String, view: View) {
+        override fun onCheckoutUpdateSuccess(message: String, view: View) {
         Navigation.findNavController(view).navigate(R.id.action_success, null)
     }
 
     override fun onCheckoutUpdateFailed(message: String) {
         showSnackbarMessage(binding.btnLanjutkan, message, Const.ToastType.Error)
-
     }
 
     override fun onCheckoutFailed(message: String) {
         showSnackbarMessage(binding.btnLanjutkan, message, Const.ToastType.Error)
     }
 
-    private fun setCheckout(dataPassengerParms : ArrayList<String>,
-                            dataKursiParms : ArrayList<KursiResponse>,
-                            busParms: BusResponse,
-                            dataPickParms : BusRequest,
-                            view:View,
-                            statusBayar : String,
-                            jenisBayar : String) {
+    private fun setCheckout(
+        dataPassengerParms: ArrayList<String>,
+        dataKursiParms: ArrayList<KursiResponse>,
+        busParms: BusResponse,
+        dataPickParms: BusRequest,
+        view: View,
+        statusBayar: String,
+        jenisBayar: String
+    ) {
 
         var penumpangTemp = ArrayList<Penumpang>()
-        var checkoutRequest : CheckoutRequest
+        var checkoutRequest: CheckoutRequest
 
         for (i in dataPassengerParms.indices) {
             penumpangTemp.add(
                 Penumpang(
                     "",
                     dataKursiParms.get(i).nameKursi,
-                    dataPassengerParms.get(i))
+                    dataPassengerParms.get(i)
+                )
             )
         }
 
@@ -242,50 +250,80 @@ class PersonalInfoFragment : BaseBindingFragment(), PersonalInfoAdapter.ItemPenu
         )
 
         presenter.setCheckoutBooking(checkoutRequest, view)
-
     }
 
     private fun initMidtransSDK() {
         val uisetting = UIKitCustomSetting()
-        uisetting.isShowPaymentStatus = true
-        uisetting.isSkipCustomerDetailsPages = true
+        uisetting.setSaveCardChecked(true)
+        uisetting.setShowPaymentStatus(true)
+//        uisetting.isShowPaymentStatus = true
+//        uisetting.isSkipCustomerDetailsPages = true
 
-         SdkUIFlowBuilder.init()
-             .setContext(requireContext())
-             .setMerchantBaseUrl(BuildConfig.BASE_URL_PAY)
-             .setClientKey(BuildConfig.CLIENT_KEY)
-             .setTransactionFinishedCallback(this)
-             .enableLog(true)
-             .setColorTheme(
-                 CustomColorTheme("#AA55FF", "#1A45BC","#AA55FF")
-             )
-             .buildSDK()
+        SdkUIFlowBuilder.init()
+            .setContext(requireContext())
+            .setMerchantBaseUrl(BuildConfig.BASE_URL_PAY)
+            .setClientKey(BuildConfig.CLIENT_KEY)
+            .setTransactionFinishedCallback(this)
+            .enableLog(true)
+            .setColorTheme(
+                CustomColorTheme("#AA55FF", "#1A45BC", "#AA55FF")
+            )
+            .buildSDK()
     }
 
-    override fun onTransactionFinished(result : TransactionResult) {
+    override fun onTransactionFinished(result: TransactionResult) {
         if (result.response != null) {
             when (result.status) {
                 TransactionResult.STATUS_SUCCESS -> {
-                    presenter.setCheckoutUpdate(idTiketParms, "done", viewPay)
+                    presenter.setCheckoutUpdate(
+                        idTiketParms,
+                        "done",
+                        viewPay
+                    )
                 }
+
                 TransactionResult.STATUS_PENDING -> {
-                    presenter.setCheckoutUpdate(idTiketParms, "pending", viewPay)
+                    presenter.setCheckoutUpdate(
+                        idTiketParms,
+                        "pending",
+                        viewPay
+                    )
                 }
+
                 TransactionResult.STATUS_FAILED -> {
-                    presenter.setCheckoutUpdate(idTiketParms, "failed", viewPay)
+                    presenter.setCheckoutUpdate(
+                        idTiketParms,
+                        "failed",
+                        viewPay
+                    )
                 }
             }
-
-            result.response.validationMessages
+            result.response.statusCode
         } else if (result.isTransactionCanceled) {
-            showSnackbarMessage(binding.btnLanjutkan, "Transaksi ini dibatalkan", Const.ToastType.Error)
+            showSnackbarMessage(
+                binding.btnLanjutkan,
+                "Transaksi ini dibatalkan",
+                Const.ToastType.Error
+            )
         } else {
             if (result.status.equals(TransactionResult.STATUS_INVALID, true)) {
-                showSnackbarMessage(binding.btnLanjutkan, "Transaksi ini invalid", Const.ToastType.Error)
+                showSnackbarMessage(
+                    binding.btnLanjutkan,
+                    "Transaksi ini invalid",
+                    Const.ToastType.Error
+                )
             } else {
-                showSnackbarMessage(binding.btnLanjutkan, "Transaksi ini finish with failed", Const.ToastType.Error)
+                showSnackbarMessage(
+                    binding.btnLanjutkan,
+                    "Transaksi ini finish with failed",
+                    Const.ToastType.Error
+                )
+
             }
         }
-
     }
+
+
+
+
 }
