@@ -2,11 +2,6 @@ package com.hafidtech.loketbus.ui.main.mybooking.detail
 
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.viewbinding.ViewBinding
 import com.bagicode.bagicodebaseutils.basewithbinding.BaseBindingActivity
 import com.bagicode.bagicodebaseutils.utils.loadRoundedImage
@@ -84,6 +79,7 @@ class MyBookingDetailActivity : BaseBindingActivity() {
                 bitmap.setPixel(i, j, if (byteMatrix[i, j]) Color.BLACK else Color.WHITE)
             }
         }
+        return bitmap
     }
 
 

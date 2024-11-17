@@ -50,13 +50,13 @@ android {
             applicationId = "com.hafidtech.loketbus.dev"
             buildConfigField "String", "BASE_URL", "\"https://project.bagicode.com/\""
             buildConfigField "String", "BASE_URL_PAY", "\"https://api.bagicode.com/Midtrans/index.php/\""
-            buildConfigField "String", "CLIENT_KEY", "\"KEY MIDTRANS\""
+            buildConfigField "String", "CLIENT_KEY", "\"Mid-client-KiIM-y02WDgFEi1N\""
         }
         mainApp {
             applicationId = "com.hafidtech.loketbus"
             buildConfigField "String", "BASE_URL", "\"https://project.bagicode.com/\""
             buildConfigField "String", "BASE_URL_PAY", "\"https://api.bagicode.com/Midtrans/index.php/\""
-            buildConfigField "String", "CLIENT_KEY", "\"KEY MIDTRANS\""
+            buildConfigField "String", "CLIENT_KEY", "\"Mid-client-KiIM-y02WDgFEi1N\""
         }
     }
 }
@@ -90,6 +90,7 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation 'com.google.zxing:core:3.4.1'
+    implementation 'com.midtrans:uikit:1.23.1-SANDBOX'
 
     implementation 'androidx.work:work-runtime-ktx:2.7.0'
 
